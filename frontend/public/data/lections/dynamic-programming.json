@@ -1,0 +1,7 @@
+{
+    "topic_name": "Динамичко Програмирање",
+    "lections": [
+        { "name": "Bitmask DP", "code": "bitmask-dp" },
+        { "name": "Range DP", "code": "range-dp" }
+    ]
+}
