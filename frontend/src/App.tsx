@@ -4,7 +4,6 @@ import { Nav } from "./layout/Nav.tsx"
 import { Topic } from "./pages/Topic.tsx"
 import { Register } from "./pages/Register.tsx"
 import { Login } from './pages/Login.tsx'
-import { Testing } from "./pages/Testing.tsx"
 
 export const App = () => {
   return (
@@ -17,7 +16,6 @@ export const App = () => {
           <Route path='/topic/:id/:lectionCode' element={<Topic />} />
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/test' element={<Testing />} />
         </Routes>
       </div>
     </div>

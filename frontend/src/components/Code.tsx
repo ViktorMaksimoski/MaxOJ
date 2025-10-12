@@ -28,7 +28,7 @@ export const Code = ({ children }: CodeProps) => {
     setShow(!show);
   }
 
-  const displayedCode = !show ? lines.join('\n') : lines.slice(0, 10).join('\n')
+  const displayedCode = !show ? lines.join('\n') : lines.slice(0, 15).join('\n')
 
   return (
     <div className='w-[90%] py-2 bg-sky-50 mt-2 relative shadow-md shadow-slate-200'>
