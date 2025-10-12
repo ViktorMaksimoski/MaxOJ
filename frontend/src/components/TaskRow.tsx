@@ -25,7 +25,8 @@ export const TaskRow = ({ url, source, star, task, level }: TaskRowProps) => {
             </div>
         </td>
         <td className='text-center font-semibold px-4'>
-            <button className={`${types[level].color} text-white rounded-2xl px-5 py-0.5 w-full`}>
+            <button className={`bg-${types[level].color}-500 text-white rounded-2xl px-5 py-0.5 w-full
+                shadow-sm shadow-slate-400`}>
                 {types[level].name}
             </button>
         </td>

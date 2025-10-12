@@ -1,8 +1,8 @@
 import type { TaskType } from "../models/TaskType";
 
 export const types: Record<number, TaskType> = {
-    1: { color: "bg-lime-500", name: "Лесна" },
-    2: { color: "bg-blue-500", name: "Средна" },
-    3: { color: "bg-purple-500", name: "Тешка" },
-    4: { color: "bg-red-500", name: "Пеколна" }
+    1: { color: "lime", name: "Лесна" },
+    2: { color: "blue", name: "Средна" },
+    3: { color: "purple", name: "Тешка" },
+    4: { color: "red", name: "Пеколна" }
 }

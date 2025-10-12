@@ -15,6 +15,7 @@ import { FocusProblem } from '../components/FocusProblem'
 import { Tag } from '../components/Tag'
 import { SectionContent } from '../components/SectionContent'
 import { LectionNotFound } from '../components/LectionNotFound'
+import { Spoiler } from '../components/Spoiler'
 
 const components = {
     SectionTitle,
@@ -27,7 +28,8 @@ const components = {
     TasksTable,
     Tag,
     SectionContent,
-    FocusProblem
+    FocusProblem,
+    Spoiler
 };
 
 export const Topic = () => {

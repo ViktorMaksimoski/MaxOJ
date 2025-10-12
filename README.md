@@ -133,3 +133,15 @@ level={4} />
 	name="Errihcto - Вовед во DP" importance={4} />
 </LinksTable>
 ```
+## Spoiler
+Ова е **Wrapper** компонента што користи **props**:
+**title** (задолжително): Наслов
+
+Се користи за задавање на хинтови
+
+Пример употреба
+```tsx
+<Spoiler title="Hint 1">
+	Овој hint е од голема помош.
+</Spoiler>
+```
