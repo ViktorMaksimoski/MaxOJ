@@ -8,7 +8,7 @@ export const LinksTable = ({ children }: LinksTableProps) => {
         <thead className='border-gray-100'>
             <tr className='h-7'>
                 <th className='w-[18%] font-semibold text-blue-700'>Извор</th>
-                <th className='font-semibold text-blue-700'>Страница</th>
+                <th className='font-semibold text-blue-700'>Матријал(и)</th>
                 <th className='w-[15%] font-semibold text-blue-700'>Важност</th>
             </tr>
         </thead>

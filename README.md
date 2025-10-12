@@ -70,7 +70,7 @@ praesentium  quidem. Est,  quisquam  facere!
 ```tsx
 <Code>
 {[
-"#include <bits/stdc++.h>,
+"#include <bits/stdc++.h>",
 "using namespace std;",
 "\nint main() {",
 "\treturn 0;",
