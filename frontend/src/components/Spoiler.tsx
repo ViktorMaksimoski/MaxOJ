@@ -11,12 +11,13 @@ export const Spoiler = ({ children, title }: SpoilerProps) => {
 
   return (
     <div className="mt-5 w-[70%] shadow-sm shadow-blue-200">
-        <button onClick={() => setShow(!show)}
-        className={`bg-sky-300 w-full flex justify-between 
-        items-center
-        py-2.5 px-5 rounded-t-lg text-lg text-white font-semibold
-        ${!show && "rounded-b-lg"}
-        ${show && "text-sky-500 bg-white border border-sky-500"}`}>
+        <button
+        onClick={() => setShow(!show)}
+        className={`w-full flex justify-between items-center py-2.5 px-5 rounded-t-lg text-lg font-semibold
+        ${show 
+        ? "text-sky-500 bg-white border border-sky-500" 
+        : "text-white bg-sky-300 rounded-b-lg shadow-sm shadow-blue-200"
+        }`}>
             {title}
             <div>
                 {show && <ArrowUpCircleIcon size={40} />}

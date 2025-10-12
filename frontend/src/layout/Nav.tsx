@@ -1,5 +1,9 @@
+import { signOut } from "firebase/auth"
 import { useState, useEffect } from "react"
 import { Link, useLocation, useNavigate } from "react-router"
+import { auth } from "../firebase"
+import toast from "react-hot-toast"
+import { useAuth } from "../contexts/AuthContext"
 
 const Dataset = ({ onSelect, setInputTopic }) => {
     const topics = [
@@ -31,6 +35,7 @@ export const Nav = () => {
   const [open, setOpen] = useState(false);
   const [topic, setTopic] = useState({ name:"", code:"" });
   const [hovered, setHovered] = useState(false)
+  const { user, loading } = useAuth()
   const navigate = useNavigate()
   const location = useLocation();
 
@@ -38,6 +43,16 @@ export const Nav = () => {
         if(topic.code !== "")
             navigate(`/topic/${topic.code}`)
   }, [topic])
+
+  const logOut = async () => {
+    try {
+        await signOut(auth)
+        navigate('/')
+    } catch(err) {
+        console.log(err)
+        toast.error('Не може да се одјавите! Пробајте повторно')
+    }
+  }
 
   if(location.pathname == "/register" || location.pathname == "/login")
         return null;
@@ -61,6 +76,7 @@ export const Nav = () => {
                 
                 <div className="relative">{open && <Dataset onSelect={setOpen} setInputTopic={setTopic} />}</div>
             </div>
+            {!user && 
             <div className="flex gap-5">
                 <button onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
@@ -70,7 +86,14 @@ export const Nav = () => {
                 <button className={`text-lg px-6 ${!hovered && "bg-blue-600 text-white rounded-md py-1.5"}`}>
                     <Link to={'/login'}>Најава</Link>
                 </button>
-            </div>
+            </div>}
+            {user && 
+            <div className="flex items-center gap-5">
+                <p className="text-lg">Арена</p>
+                <button className="text-lg px-6 text-white
+                bg-blue-600 py-1.5 rounded-md"
+                onClick={() => logOut()}>Одјава</button>
+            </div>}
         </div>
     </nav>
   )
