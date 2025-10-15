@@ -3,36 +3,8 @@ import { useParams } from "react-router";
 import { Sidebar } from "../layout/Sidebar";
 import type { LectionData } from "../models/Lection.interface";
 import { Star } from "lucide-react";
-import { TasksTable } from "../components/TasksTable";
-import { LinksTable } from "../components/LinksTable";
-import { TaskRow } from "../components/TaskRow";
-import { LinkRow } from "../components/LinkRow";
-import { Code } from "../components/Code";
-import { SectionTitle } from "../components/SectionTitle";
-import { Info } from "../components/Info";
-import { Warning } from "../components/Warning";
-import { FocusProblem } from "../components/FocusProblem";
-import { Tag } from "../components/Tag";
-import { SectionContent } from "../components/SectionContent";
 import { LectionNotFound } from "../components/LectionNotFound";
-import { Spoiler } from "../components/Spoiler";
-import { AuthOnly } from "../components/AuthOnly";
-
-const components = {
-  SectionTitle,
-  Code,
-  Warning,
-  Info,
-  LinkRow,
-  LinksTable,
-  TaskRow,
-  TasksTable,
-  Tag,
-  SectionContent,
-  FocusProblem,
-  Spoiler,
-  AuthOnly,
-};
+import { mdxComponents } from "../lib/mdx-components";
 
 export const Topic = () => {
   const { id, lectionCode } = useParams();
@@ -78,10 +50,10 @@ export const Topic = () => {
         {lectionCode && (
           <div>
             <div className="flex justify-between">
-              <h1 className="text-bold text-4xl tracing-wide">
+              <h1 className="text-bold text-4xl tracking-wide">
                 {metaData.title}
               </h1>
-              <div className="flex">{stars}</div>
+              <button className="flex">{stars}</button>
             </div>
             <p className="text-gray-400 mt-0.5">Автор: {metaData.author}</p>
             <hr className="mt-2" />
@@ -89,7 +61,7 @@ export const Topic = () => {
         )}
 
         {loading && <LectionNotFound />}
-        {!loading && <Content components={components} />}
+        {!loading && <Content components={mdxComponents} />}
       </div>
     </div>
   );

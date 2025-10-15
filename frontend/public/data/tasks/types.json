@@ -1,0 +1,121 @@
+{
+    "years": [
+        {
+            "year": 2025,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2024,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2023,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2022,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2021,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2020,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2019,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2018,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2017,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2016,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2015,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2014,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        },
+        {
+            "year": 2013,
+            "types": [
+                { "name": "Училишен", "code": "ucilisen" },
+                { "name": "Регионален", "code": "regionalen" },
+                { "name": "Државен", "code": "drzaven" },
+                { "name": "МОИ", "code": "moi" }
+            ]
+        }
+    ]
+}

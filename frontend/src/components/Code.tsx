@@ -15,7 +15,7 @@ export const Code = ({ children }: CodeProps) => {
     setLines(children.split('\n'))
   }, [])
 
-  const copyText = async() => {
+  const copyText = async () => {
     try {
         await navigator.clipboard.writeText(children);
         toast.success('Кодот е успешно копиран')
