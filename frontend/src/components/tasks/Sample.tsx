@@ -22,7 +22,7 @@ export const Sample = ({ children }: SampleProps) => {
     <div className="flex w-full justify-between">
       {deca.map((dete, i) => (
         <div className={`bg-gray-100 border px-4 py-1.5 
-        w-[40%] ${hovered && "border-blue-400"} mb-3.5
+        w-[45%] lg:w-[40%] ${hovered && "border-blue-400"} mb-3.5
         hover:bg-sky-100 cursor-pointer`}
         key={i}
         onMouseEnter={() => setHovered(true)}

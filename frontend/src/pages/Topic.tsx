@@ -42,8 +42,8 @@ export const Topic = () => {
   }, [id, lectionCode]);
 
   return (
-    <div className="flex justify-evenly w-full px-12 pt-3 gap-6">
-      <div className="flex-[1] top-0 h-fit">
+    <div className="flex justify-evenly w-full px-4 sm:px-12 pt-3 gap-6">
+      <div className="hidden sm:flex sm:flex-[1] sticky top-24 h-fit self-start">
         <Sidebar topicId={id} />
       </div>
       <div className="flex-[3] mb-4">

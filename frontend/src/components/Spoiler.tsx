@@ -10,7 +10,7 @@ export const Spoiler = ({ children, title }: SpoilerProps) => {
   const [show, setShow] = useState<boolean>(false);
 
   return (
-    <div className="mt-5 w-[70%] shadow-sm shadow-blue-200">
+    <div className="mt-5 w-[100%] sm:w-[70%] shadow-sm shadow-blue-200">
         <button
         onClick={() => setShow(!show)}
         className={`w-full flex justify-between items-center py-2.5 px-5 rounded-t-lg text-lg font-semibold

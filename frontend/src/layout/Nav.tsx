@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { auth } from "../firebase";
 import toast from "react-hot-toast";
 import { useAuth } from "../contexts/AuthContext";
+import { LogInIcon, LogOutIcon, ScaleIcon } from "lucide-react";
 
 const Dataset = ({ onSelect, setInputTopic }) => {
   const topics = [
@@ -85,48 +86,54 @@ export const Nav = () => {
             {open && <Dataset onSelect={setOpen} setInputTopic={setTopic} />}
           </div>
         </div>
-        {!user && (
-          <div className="flex items-center gap-5">
-            <Link to={"/register"}>
-              <button
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-                className="text-lg px-6 hover:bg-blue-600 hover:text-white hover:rounded-md hover:py-1.5"
-              >
-                Регистрација
-              </button>
-            </Link>
-            <Link to={"/login"}>
-              <button
-                className={`text-lg px-6 ${
-                  !hovered && "bg-blue-600 text-white rounded-md py-1.5"
-                }`}
-              >
-                Најава
-              </button>
-            </Link>
-          </div>
-        )}
-        {user && (
-          <div className="flex items-center gap-5">
-            <Link to={"/judge"}>
-              <button className="text-lg
-              border border-blue-600 text-blue-500 py-1.5 px-6
-              rounded-md shadow-sm shadow-sky-100
-              hover:text-blue-600 border-blue-700
-              hover:shadow-none">Арена</button>
-            </Link>
+
+        <div className="flex items-center gap-5">
+          <Link to={"/judge"}>
             <button
-              className="text-lg px-6 text-white
+              className="text-lg
+              border border-blue-600 text-blue-500 py-1.5 px-2.5
+              sm:px-6 rounded-md shadow-sm shadow-sky-100
+              hover:text-blue-600 border-blue-700
+              hover:shadow-none"
+            >
+              <div className="block sm:hidden">
+                <ScaleIcon />
+              </div>
+              <div className="hidden sm:block">Арена</div>
+            </button>
+          </Link>
+          {user && (
+            <button
+              className="text-lg px-2.5 sm:px-6 text-white
                 bg-blue-600 py-1.5 rounded-md
                 shadow-sm shadow-sky-200
                 hover:shadow-none hover:bg-blue-600"
               onClick={() => logOut()}
             >
-              Одјава
+              <div className="block sm:hidden">
+                <LogOutIcon />
+              </div>
+              <div className="hidden sm:block">Одјава</div>
             </button>
-          </div>
-        )}
+          )}
+          {!user && (
+            <Link to={"/login"}>
+              <button
+                className={`text-lg px-2.5 sm:px-6 ${
+                  !hovered && "bg-blue-600 text-white rounded-md py-1.5"
+                } ${
+                  hovered &&
+                  "text-blue-500 border border-blue-600 bg-white py-1.5 rounded-md"
+                }`}
+              >
+                <div className="block sm:hidden">
+                  <LogInIcon />
+                </div>
+                <div className="hidden sm:block">Најава</div>
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );

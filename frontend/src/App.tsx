@@ -11,6 +11,7 @@ import { MainLayout } from "./layout/MainLayout.tsx";
 import { JudgeLayout } from "./layout/JudgeLayout.tsx";
 import { JudgeHome } from "./pages/JudgeHome.tsx";
 import { Competiton } from "./pages/Competiton.tsx";
+import { Submit } from "./pages/Submit.tsx";
 
 export const App = () => {
   return (
@@ -42,9 +43,11 @@ export const App = () => {
             <Route element={<JudgeHome />} path="/judge" />
             <Route path="/judge/:year/:compId/:taskId"
             element={
-              <UsersOnlyRoute>
                 <Competiton />
-              </UsersOnlyRoute>
+            } />
+            <Route path="/judge/:year/:compId/:taskId/submit"
+            element={
+              <Submit />
             } />
         </Route>
       </Routes>

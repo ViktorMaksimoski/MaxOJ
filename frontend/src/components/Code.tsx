@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import toast from 'react-hot-toast'
+import { CopyIcon } from 'lucide-react';
 
 interface CodeProps {
     children: string;
@@ -31,20 +32,30 @@ export const Code = ({ children }: CodeProps) => {
   const displayedCode = !show ? lines.join('\n') : lines.slice(0, 15).join('\n')
 
   return (
-    <div className='w-[90%] py-2 bg-sky-50 mt-2 relative shadow-md shadow-slate-200'>
-        <button className='absolute top-2 right-3
+    <div className='w-[100%] md:w-[90%] py-2 bg-sky-50 mt-2 relative shadow-md shadow-slate-200'>
+        {window.innerWidth > 640 && <button className='absolute top-2 right-3
         text-white bg-blue-500 font-semibold text-base
          px-3 py-0.5 shadow-md shadow-sky-200
          hover:bg-blue-600'
          onClick={() => copyText()}>
             Копирај
-        </button>
+        </button>}
+        {window.innerWidth <= 640 && <button className='absolute top-4 right-4
+        md:right-3 md:top-2
+        text-white bg-blue-500 text-base
+          p-2.5 shadow-md rounded-full shadow-sky-200
+         hover:bg-blue-600'
+         onClick={() => copyText()}>
+            <CopyIcon size={17}/>
+        </button>}
+        {}
         <div className='px-4 py-1 whitespace-pre'>
             <SyntaxHighlighter language="cpp" style={docco}>
                 {displayedCode}
             </SyntaxHighlighter>
             {lines.length > 10 && <div className='w-full text-center'>
-                <button className='bg-blue-500 font-semibold mb-1
+                <button className='bg-blue-500 font-semibold mb-2.5
+                md:mb-1
                 text-base shadow-sm shadow-sky-200 text-white
                 px-3 py-0.5' onClick={() => showButton()}>
                     {show ? "Прикажи повеќе" : "Скриј"}

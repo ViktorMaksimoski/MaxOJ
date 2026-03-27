@@ -1,44 +1,30 @@
-<SectionTitle>Вовед</SectionTitle>
+<SectionTitle>Focus Problem</SectionTitle>
 
-<SectionContent>
-Gdje si bajoooo!!! Sta to kazes <Tag>Lice</Tag>!!!
-Kapiras????
-</SectionContent>
+<FocusProblem url="https://cses.fi/problemset/task/1690" source="CSES"
+task="Hamiltonian Flights" level={1} />
 
-<Info>Многу често може да користите Bitmask DP за 
-решавање на подзадачи.</Info>
-
-<Warning>Секогаш поставувајте основен случај при пишување рекурзија!</Warning>
-
-<Code>
-{[
-"#include <bits/stdc++.h>",
-"using namespace std;",
-"\nint main() {",
-"\treturn 0;",
-"}"
-].join('\n')}
-</Code>
-
-<FocusProblem url="https://mendo.mk"
-source="MENDO" task="Паметен Град"
-level={4} />
-
-<TasksTable>
-	<TaskRow url="https://oj.uz/problem/view/JOI18_Tents"
-	source="OJ.UZ" task="JOI SC - Tents" level={2} />
-	<TaskRow url="https://mendo.mk" source="MENDO" 
-	task="Паметен Град" level={4} star={true} />
-</TasksTable>
+<SectionTitle></SectionTitle>
 
 <LinksTable>
 	<LinkRow url="https://usaco.guide/CPH.pdf#page=112"
-	source="CPH" name="НРС, Броење" importance={3} />
-	<LinkRow url="https://www.youtube.com/watch?
-	v=YBSt1jYwVfU&t=45s" source="YouTube"
-	name="Errihcto - Вовед во DP" importance={4} />
+	source="CPH" name="10.5 - DP on Bits, 19.2 - Hamiltonian Paths"
+	importance={3} />
 </LinksTable>
 
-<Spoiler title="Naslovce">
-	Ова е голем Hint за главната обсервација.
-</Spoiler>
+<SectionTitle>Solution</SectionTitle>
+
+<SectionContent>
+	Let $$dp[S][i]$$ be the number of routes that visit all cities in
+	the subset $$S$$ and end at the city $$i$$. Then the transition will be:
+
+	$$
+	dp[S][i] = \sum_{x \in adj[i]} dp[S \setminus \{i\}][x] \quad \text{if } x \in S
+	$$
+
+	where $$S \setminus  {i}$$ is the subset $$S$$ without city $$i$$.
+</SectionContent>
+
+<TasksTable>
+	<TaskRow url="https://atcoder.jp/contests/dp/tasks/dp_o?lang=en"
+	source="AtCoder" task="Matching" level={1} />
+</TasksTable>

@@ -37,7 +37,7 @@ export const Login = () => {
 
   return (
     <div className='flex gap-0 min-h-screen w-full'>
-        <div className='flex-1'>
+        <div className='hidden sm:flex sm:flex-1'>
             <p>Baba</p>
         </div>
         <div className='text-center flex-1 bg-slate-50'>

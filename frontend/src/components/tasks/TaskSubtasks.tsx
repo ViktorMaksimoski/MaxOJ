@@ -1,6 +1,6 @@
 export const TaskSubtasks = ({ children }: {children: React.ReactNode}) => {
   return (
-    <table className='w-[70%] table-auto mx-auto bg-white mt-6 mb-4 rounded-md
+    <table className='w-[95%] sm:w-[70%] table-auto mx-auto bg-white mt-6 mb-4 rounded-md
     shadow-sm shadow-slate-200 border hover:border-blue-200 border-collapse'>
         <thead className='py-0.5 border-b'>
           <tr className='w-full'>
