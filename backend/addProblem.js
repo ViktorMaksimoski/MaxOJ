@@ -4,6 +4,7 @@ import { execFileSync } from "child_process";
 import readlineSync from "readline-sync";
 import { db } from "./src/config/firebase.js";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { spawnSync } from "child_process";
 
 
 // ==================================================
@@ -185,23 +186,16 @@ for (const testNumber of inputTests) {
     console.log(`Running test ${testNumber}...`);
 
     try {
-
-        const input = fs.readFileSync(
-            inputPath
-        );
-
-        const output = execFileSync(
-            solutionPath,
-            {
-                input,
-                maxBuffer: 1024 * 1024 * 100
-            }
-        );
-
-        fs.writeFileSync(
-            outputPath,
-            output
-        );
+        const result = spawnSync(
+        "sh",
+        [
+            "-c",
+            `"${solutionPath}" < "${inputPath}" > "${outputPath}"`
+        ],
+        {
+            stdio: "inherit"
+        }
+);
 
     } catch (error) {
 
@@ -378,17 +372,17 @@ try {
     process.exit(1)
 }
 
-// for (const testNumber of inputTests) {
-//     console.log(`Uploading test ${testNumber}.in`);
-//     await s3.send(new PutObjectCommand({
-//         Bucket: process.env.B2_BUCKET_NAME,
-//         Key: `${problemId}/${testNumber}.in`,
-//         Body: fs.readFileSync(path.join(testsDir, `${testNumber}.in`))
-//     }))
-//     console.log(`Uploading test ${testNumber}.out`);
-//     await s3.send(new PutObjectCommand({
-//         Bucket: process.env.B2_BUCKET_NAME,
-//         Key: `${problemId}/${testNumber}.out`,
-//         Body: fs.readFileSync(path.join(testsDir, `${testNumber}.out`))
-//     }))
-// }
+for (const testNumber of inputTests) {
+    console.log(`Uploading test ${testNumber}.in`);
+    await s3.send(new PutObjectCommand({
+        Bucket: process.env.B2_BUCKET_NAME,
+        Key: `${problemId}/${testNumber}.in`,
+        Body: fs.readFileSync(path.join(testsDir, `${testNumber}.in`))
+    }))
+    console.log(`Uploading test ${testNumber}.out`);
+    await s3.send(new PutObjectCommand({
+        Bucket: process.env.B2_BUCKET_NAME,
+        Key: `${problemId}/${testNumber}.out`,
+        Body: fs.readFileSync(path.join(testsDir, `${testNumber}.out`))
+    }))
+}

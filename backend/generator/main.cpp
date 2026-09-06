@@ -19,18 +19,38 @@ signed main() {
     cin.tie(0); cout.tie(0);
 
     for(int test=1; test<=2; test++) {
-        int x = gen(50, 500);
+        int n = gen(900, 1000), d = gen(1, 1000);
         
         ofstream in("tests/" + to_string(test) + ".in");
-        in << x << '\n';
+        in << n << " " << d << '\n';
+
+        for(int i=1; i<=n; i++) {
+            int x = gen(1, 10000000), y = gen(1, 5000);
+            in << x << " " << y << '\n';
+        }
     }
 
-    ofstream in("tests/3.in");
-    in << 9999 << '\n';
+    for(int test=3; test<=6; test++) {
+        int n = gen((int)5e4, (int)1e5), d = gen(1000, (int)1e6);
+        
+        ofstream in("tests/" + to_string(test) + ".in");
+        in << n << " " << d << '\n';
 
-    ofstream in2("tests/4.in");
-    in2 << 2346 << '\n';
+        for(int i=1; i<=n; i++) {
+            int x = gen(1, 10000000), y = gen(1, (int)4e5);
+            in << x << " " << y << '\n';
+        }
+    }
 
-    ofstream in3("tests/5.in");
-    in3 << 5376 << '\n';
+    // for(int test=7; test<=10; test++) {
+    //     int n = gen((int)5e5, (int)1e6), d = gen(1000, (int)1e6);
+        
+    //     ofstream in("tests/" + to_string(test) + ".in");
+    //     in << n << " " << d << '\n';
+
+    //     for(int i=1; i<=n; i++) {
+    //         int x = gen(1, 10000000), y = gen(1, (int)4e5);
+    //         in << x << " " << y << '\n';
+    //     }
+    // }
 }

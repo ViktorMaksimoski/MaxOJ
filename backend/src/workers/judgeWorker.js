@@ -109,6 +109,9 @@ const worker = new Worker("judge", async (job) => {
 
             const expected = await getTest(`${pid}/${j}.out`);
 
+            console.log('Expected: ', expected);
+            console.log('Output: ', output)
+
             if(expected.trim() !== output.stdout.trim()) {
                 score = 0;
                 subtaskFlag = 'WA';

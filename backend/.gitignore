@@ -3,4 +3,3 @@ serviceAccountKey.json
 cache/
 generator/tests/
 node_modules
-package-lock.json
