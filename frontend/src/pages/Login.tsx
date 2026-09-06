@@ -38,7 +38,7 @@ export const Login = () => {
   return (
     <div className='flex gap-0 min-h-screen w-full'>
         <div className='hidden sm:flex sm:flex-1'>
-            <p>Baba</p>
+            <img src="/login_main.jpg" />
         </div>
         <div className='text-center flex-1 bg-slate-50'>
             <div className="flex justify-between items-center ml-10 mr-10 mt-6">

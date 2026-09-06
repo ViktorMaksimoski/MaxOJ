@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
 import { JudgeSidebar } from "../layout/JudgeSidebar";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { formatNum } from "../lib/formatNum";
+import { useAuth } from "../contexts/AuthContext";
 import toast from "react-hot-toast";
 
 export const Submit = () => {
@@ -11,10 +12,12 @@ using namespace std;
     cout << "Hello World" << endl;
     return 0;
 }`);
+  const { user, loading } = useAuth();
   const inputRef = useRef(null);
   const gutterRef = useRef(null);
   const [bad, setBad] = useState(false);
   const { year, compId, taskId } = useParams();
+  const navigate = useNavigate();
 
   const handleKeyDown = (e) => {
     if (e.key !== "Tab") return;
@@ -42,11 +45,50 @@ using namespace std;
   ];
 
   const submitCode = async () => {
+    if(code.length > 6000) {
+      toast.error('Вашиот код не смее да содржи повеќе од 6000 карактери')
+      setBad(true);
+      return ;
+    }
+    
     for (const pattern of forbiddenPatterns)
       if (pattern.test(code)) {
         setBad(true);
         return;
       }
+
+    if(!user) {
+      toast.error("Мора да бидете најавени за да пратите решение")
+      return ;
+    }
+
+    const pid = `${year}${compId}${taskId}`;
+    const token = await user.getIdToken();
+
+    const res = await fetch("http://localhost:5001/api/submission", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        pid: pid,
+        code: code
+      })
+    })
+
+    const data = await res.json();
+
+    if(!data.success) {
+      toast.error(data.message || "Грешка при испраќање на решението")
+      return ;
+    }
+
+    await toast.success("Решението е успешно испратено")
+
+    setTimeout(() => {
+      navigate(`/judge/submission/${data.submissionId}`)
+    }, 1000)
 
     setBad(false);
   };

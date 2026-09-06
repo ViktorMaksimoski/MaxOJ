@@ -22,6 +22,7 @@ export const JudgeSidebar = () => {
   }, [year, compId]);
 
   const isSubmit = location.pathname.endsWith("/submit")
+  const isView = location.pathname.includes("/view")
 
   return (
     <div className="w-full">
@@ -37,10 +38,10 @@ export const JudgeSidebar = () => {
           {name}
         </h3>
         {tasks.map((task) => (
-          <div className="mb-1">
+          <div className="mb-1" key={task.code}>
           <NavLink
-            key={task.code}
-            to={`/judge/${year}/${compId}/${task.code}/${isSubmit?"submit":""}`}
+            // key={task.code}
+            to={`/judge/${year}/${compId}/${task.code}/${isSubmit?"submit":isView?"view/1":""}`}
             className={({ isActive }) =>
               isActive ? `text-blue-600 font-medium` : `text-base`
             }
@@ -63,15 +64,15 @@ export const JudgeSidebar = () => {
       mt-4 py-1.5 rounded-md text-white shadow-sm shadow-slate-300
       tracking-wide hover:shadow-none hover:bg-blue-900
       hover:border-blue-500 font-medium"
-      onClick={() => navigate(`/judge/${year}/${compId}/${taskId}/${!isSubmit?"submit":""}`)}>
-        {!isSubmit ? "Испрати Решение" : "Прочитај Текст"}
+      onClick={() => navigate(`/judge/${year}/${compId}/${taskId}/${isSubmit||isView?"":"submit"}`)}>
+        {isSubmit || isView ? "Прочитај Текст" : "Испрати Решение"}
       </button>}
       {user && <button className="w-full bg-blue-800 border-2 border-sky-400
       mt-4 py-1.5 rounded-md text-white shadow-sm shadow-slate-300
       tracking-wide hover:shadow-none hover:bg-blue-900
       hover:border-blue-500 font-medium"
-      onClick={() => navigate(`/judge/${year}/${compId}/${taskId}/${!isSubmit?"submit":""}`)}>
-        Твои Решенија
+      onClick={() => navigate(`/judge/${year}/${compId}/${taskId}/${isView?"submit":"view/1"}`)}>
+        {isView ? "Испрати Решение" : "Твои Решенија"}
       </button>}
     </div>
   );

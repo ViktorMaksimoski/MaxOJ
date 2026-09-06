@@ -21,6 +21,7 @@ export const Code = ({ children }: CodeProps) => {
         await navigator.clipboard.writeText(children);
         toast.success('Кодот е успешно копиран')
     } catch(err) {
+        toast.error('Кодот не можеше да се копира')
         console.log(err)
     }
   }

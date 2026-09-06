@@ -3,6 +3,7 @@ import { JudgeSidebar } from "../layout/JudgeSidebar"
 import { useNavigate, useParams } from "react-router"
 import { mdxTaskComponents } from "../lib/mdx-task-components"
 import { AnimatePresence, motion } from 'framer-motion'
+import { Loading } from "../components/Loading"
 
 export const Competiton = () => {
   const [Content, setContent] = useState<React.FC | null>(null)
@@ -11,6 +12,7 @@ export const Competiton = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
+    // setTimeout(() => {}, 5000)
     import(`../markdown/${year}/${compId}/${taskId}.mdx`)
     .then((module) => setContent(() => module.default))
     .catch(() => navigate('/judge'))
@@ -33,7 +35,7 @@ export const Competiton = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
             >
-              Loading...
+              <Loading />
             </motion.p>
           ) : (
             Content && (

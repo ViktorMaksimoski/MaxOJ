@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .border-mid {
+        border-width: 1.5px;
+    }
+}

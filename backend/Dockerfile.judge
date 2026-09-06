@@ -1,0 +1,16 @@
+FROM ubuntu:24.04
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        g++ \
+        gcc \
+        libc6-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /runner
+
+COPY runner.c .
+
+RUN gcc -O2 -static -o /runner/runner runner.c
+
+WORKDIR /judge
