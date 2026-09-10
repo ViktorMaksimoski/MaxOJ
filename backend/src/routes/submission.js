@@ -6,17 +6,10 @@ import { db } from "../config/firebase.js"
 import { S3Client, PutObjectCommand, S3, RestoreObject$ } from "@aws-sdk/client-s3"
 import { submissionsGetLimit } from "../middlewares/submissionsGetLimit.js"
 import { singleSubmissionLimit } from "../middlewares/singleSubmissionLimit.js"
+import { flattenNestedArrayItems } from "ioredis/built/replyTransformers.js"
+import { s3 } from "../config/s3.js"
 
 const router = express.Router()
-
-const s3 = new S3Client({
-    endpoint: process.env.B2_ENDPOINT,
-    region: "eu-central-003",
-    credentials: {
-        accessKeyId: process.env.B2_KEY_ID,
-        secretAccessKey: process.env.B2_APPLICATION_KEY
-    }
-})
 
 router.get('/single/:pid', authMiddleware, async(req, res) => {
     try {
@@ -123,6 +116,24 @@ router.post("/", authMiddleware, async (req, res) => {
                 success: false,
                 message: "Вашиот код не смее да има повеќе од 6000 карактери"
             })
+        }
+
+        const forbiddenPatterns = [
+            /#\s*pragma/i,
+            /system\s*\(/i,
+            /fork\s*\(/i,
+            /exec\s*\(/i,
+            /popen\s*\(/i,
+            /fstream\s*\(/i,
+        ];
+
+        for(const pattern of forbiddenPatterns) {
+            if(pattern.test(code)) {
+                return res.status(400).json({
+                    success: false,
+                    message: `Вашиот код не смее да користи ${pattern}`
+                })
+            }
         }
 
         const user = req.user.uid;

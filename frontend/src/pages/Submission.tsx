@@ -171,7 +171,13 @@ export const Submission = () => {
                 <ProgressCircle points={submission.points} />
             </div>
 
-            <div className="flex items-center gap-8 mx-24">
+            {submission.points == 100 && (
+                <div className="flex items-center justify-center mt-6 mb-6">
+                    <p className='text-4xl font-bold tracking-wide text-green-600'>Задачата е успешно решена!</p>
+                </div>
+            )}
+
+            <div className="flex items-center gap-8 mx-36">
                 <button className="flex text-blue-900 text-xl items-center">
                     <TimerIcon /> <span className="ml-1 font-semibold mr-0.5">{Math.max(0.01, submission.timeUsed/1000).toFixed(2)}</span> <span className="ml-1">s</span>
                 </button>
@@ -181,17 +187,23 @@ export const Submission = () => {
             </div>
 
             {submission.subtasks.map((subtask, key) => (
-                <div key={key} className={`group flex items-center justify-between
-                bg-white shadow-sm rounded-md px-4 py-3.5 mx-24 mt-3 hover:bg-neutral-50
-                border ${subtask.includes("AC") ? 'border-green-700' : 'border-red-700'}
-                ${subtask.includes("AC") ? 'hover:border-green-800' : 'hover:border-red-800'}
+                <div key={key} className={`group cursor-pointer flex items-center justify-between
+                bg-white shadow-sm rounded-md px-4 py-3.5 mx-36 mt-3 hover:bg-neutral-50
+                border ${subtask.includes("AC") ? 'border-green-700' : (subtask == "SKIP" ? "border-gray-600" : "border-red-700")}
+                ${subtask.includes("AC") ? 'hover:border-green-800' : (
+                    subtask == "SKIP" ? "hover:border-gray-700" : "hover:border-red-800"
+                )}
                 hover:border-mid hover:border-solid`}>
                     <div className='flex gap-1 items-center justify-center'>
                         <JudgedToIcon str={subtask} />
                         <p className='font-semibold ml-1.5'>Subtask {key+1} </p>
                     </div>
-                    <p className={`font-bold tracking-wider ${subtask.includes('AC') ? 'text-green-700' : 'text-red-700'}
-                    ${subtask.includes('AC') ? 'group-hover:text-green-800' : 'group-hover:text-red-800'}`}
+                    <p className={`font-bold tracking-wider ${subtask.includes('AC') ? 'text-green-700' :(
+                        subtask == "SKIP" ? 'text-gray-600' : 'text-red-700'
+                    )}
+                    ${subtask.includes('AC') ? 'group-hover:text-green-800' : (
+                        subtask == "SKIP" ? "group-hover:text-gray-700" : "group-hover:text-red-800"
+                    )}`}
                 >{formatJudge(subtask)} {(subtask[0]=='A'&& subtask[1] == 'C' && 
                     <span>
                         ({ subtask.slice(2, subtask.length) })
@@ -202,7 +214,7 @@ export const Submission = () => {
 
             {submission.status == "JUDGING" && (
                 <div className='flex items-center justify-between bg-gray-100
-                shadow-sm rounded-md px-4 py-3.5 mx-24 mt-3 border
+                shadow-sm rounded-md px-4 py-3.5 mx-36 mt-3 border
                 border-gray-200 opacity-70'>
                     <div className="flex gap-1 items-center justify-center">
                         <ScaleIcon />
@@ -210,6 +222,8 @@ export const Submission = () => {
                     </div>
                 </div>    
             )}
+
+            
 
             <div className="flex items-center justify-center mt-6 mb-6 mx-36">
                 <ShowCode id={id} />

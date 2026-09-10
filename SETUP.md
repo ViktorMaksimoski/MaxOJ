@@ -15,3 +15,6 @@ npm run start
 ## Pustanje worker
 
 npm run worker
+
+## Buildanje docker image
+

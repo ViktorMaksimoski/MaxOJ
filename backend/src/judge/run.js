@@ -4,14 +4,16 @@ import { runDocker } from "../docker.js"
 
 export const run = async (dir, input, timeLimit, memoryLimit) => {
     const inputPath = path.join(dir, "input.txt")
+    const outputPath = path.join(dir, "output.txt")
+
     memoryLimit += 128
 
-    await fs.writeFile(inputPath, input);
+    await fs.writeFile(inputPath, input)
+    await fs.writeFile(outputPath, "")
 
     const res = await runDocker([
         "run",
         "--rm",
-        "-i",
 
         "--network",
         "none",
@@ -40,8 +42,23 @@ export const run = async (dir, input, timeLimit, memoryLimit) => {
 
         "/runner/runner",
         `${timeLimit}`,
+        "/judge/output.txt",
         "/judge/main"
-    ], input)
+    ])
 
-    return res;
+    let outputRes = ""
+
+    try {
+        outputRes = await fs.readFile(outputPath, "utf8")
+    } catch (err) {
+        if (err.code !== "ENOENT") {
+            throw err
+        }
+    }
+
+    return {
+        ...res,
+        outputRes,
+        outputPath
+    }
 }

@@ -1,18 +1,10 @@
 import express from 'express'
 import { authMiddleware } from '../middlewares/auth.js'
-import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
+import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { codeViewLimit } from '../middlewares/codeViewLimit.js'
+import { s3 } from '../config/s3.js'
 
 const router = express.Router()
-
-const s3 = new S3Client({
-    endpoint: process.env.B2_ENDPOINT,
-    region: "eu-central-003",
-    credentials: {
-        accessKeyId: process.env.B2_KEY_ID,
-        secretAccessKey: process.env.B2_APPLICATION_KEY
-    }
-})
 
 export const getCode = async (key) => {
     const command = new GetObjectCommand({

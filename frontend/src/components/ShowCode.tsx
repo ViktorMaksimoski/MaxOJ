@@ -78,9 +78,9 @@ export const ShowCode = ({ id }) => {
 
     return (
         <div className="flex border mt-6 resize-none overflow-hidden
-        rounded-sm border-gray-700 w-full relative"
+        rounded-md border-gray-700 w-full relative"
         style={{ height: "22rem" }}>
-            <div className="absolute top-5 right-8 flex items-start gap-5">
+            <div className="absolute top-5 right-5 flex items-start gap-5">
                 <button className="group bg-sky-500 text-blue-800
                 font-mono text-base hover:text-blue-900 py-1 px-1 border-2 
                 border-blue-700 flex items-center gap-1"

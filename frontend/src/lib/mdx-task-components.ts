@@ -12,6 +12,7 @@ import { Sample } from "../components/tasks/Sample";
 import { TaskSubtasks } from "../components/tasks/TaskSubtasks";
 import { Subtask } from "../components/tasks/Subtask";
 import { Section } from "../components/tasks/Section";
+import { Image } from '../components/tasks/Image'
 
 export const mdxTaskComponents = {
     Code,
@@ -27,5 +28,6 @@ export const mdxTaskComponents = {
     Sample,
     TaskSubtasks,
     Subtask,
-    Section
+    Section,
+    Image
 };

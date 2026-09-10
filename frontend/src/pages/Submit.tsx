@@ -54,6 +54,7 @@ using namespace std;
     for (const pattern of forbiddenPatterns)
       if (pattern.test(code)) {
         setBad(true);
+        toast.error(`Вашиот код не смее да содржи ${pattern}`)
         return;
       }
 
@@ -133,14 +134,15 @@ using namespace std;
         </h1>
 
         <div
-          className={`flex border mt-6 rounded-sm overflow-hidden resize-none
+          className={`flex border mt-6 rounded-md overflow-hidden resize-none
         ${bad ? "border-[3px] border-red-600" : "border-gray-700"}`}
           style={{ maxHeight: "22rem" }}
         >
           <div
             ref={gutterRef}
             className={`text-center select-none py-3 px-2 
-            font-mono text-base leading-5 border-r-2 border-r-blue-700
+            font-mono text-base leading-5 border-r-2 
+            ${!bad ? "border-r-blue-700" : "border-r-red-600"}
             ${bad ? "bg-red-300 text-red-700" : "bg-sky-500 text-blue-900"}`}
             style={{ width: "2.5rem", overflow: "hidden", whiteSpace: "pre" }}
           >
@@ -166,7 +168,7 @@ using namespace std;
             onClick={submitCode}
             className="self-start tracking-wide border-[1.5px] 
           border-sky-400 bg-blue-800 hover:bg-blue-900 text-white 
-          font-medium px-5 py-2 rounded-sm transition"
+          font-medium px-5 py-2 rounded-md transition"
           >
             Испрати
           </button>
@@ -180,7 +182,7 @@ using namespace std;
               <label htmlFor="fileUpload" className="tracking-wide
               border-[1.5px] border-sky-400 bg-blue-800
               hover:bg-blue-900 text-white font-medium px-5 py-2
-              rounded-sm transition">
+              rounded-md transition">
                 Прикачи
               </label>
           </div>

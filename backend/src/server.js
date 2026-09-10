@@ -2,8 +2,10 @@ import express from 'express'
 import { db } from './config/firebase.js'
 import submissionRouter from './routes/submission.js'
 import codesRouter from './routes/codes.js'
+import imagesRouter from './routes/images.js'
 import cors from "cors"
-import { cacheCleanup } from './utils/cacheCleanup.js'
+import { problemsCacheCleanup } from './utils/problemsCacheCleanup.js'
+import { imagesCacheCleanup } from './utils/imagesCacheCleanup.js'
 
 const PORT = 5001;
 const app = express();
@@ -53,11 +55,17 @@ app.use("/api/submission", submissionRouter)
 
 app.use('/api/codes', codesRouter)
 
+app.use('/api/images', imagesRouter)
+
 //start server
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}`)
 
     setInterval(() => {
-        cacheCleanup();
+        imagesCacheCleanup();
+    }, 2.5 * 60 * 1000)
+
+    setInterval(() => {
+        problemsCacheCleanup();
     }, 5 * 60 * 1000)
 })

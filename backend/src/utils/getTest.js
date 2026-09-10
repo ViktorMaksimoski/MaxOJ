@@ -3,15 +3,7 @@ import { parseObjectValues } from "bullmq";
 import fs from 'fs'
 import fsPromises from 'fs/promises'
 import path from 'path'
-
-const s3 = new S3Client({
-    endpoint: process.env.B2_ENDPOINT,
-    region: "eu-central-003",
-    credentials: {
-        accessKeyId: process.env.B2_KEY_ID,
-        secretAccessKey: process.env.B2_APPLICATION_KEY
-    }
-})
+import { s3 } from "../config/s3.js";
 
 const CACHE_DIR = path.join(process.cwd(), "cache", "tests")
 

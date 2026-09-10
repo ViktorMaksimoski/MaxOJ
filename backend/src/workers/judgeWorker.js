@@ -9,14 +9,15 @@ import { getAllTests, getTest } from "../utils/getTest.js";
 import { run } from "../judge/run.js";
 import { cacheTests } from "../utils/testCache.js";
 import { OutputLocation$ } from "@aws-sdk/client-s3";
+import { cacheProblem } from "../utils/problemCache.js";
+// import { getProblem } from "../utils/getProblem.js";
 
 const worker = new Worker("judge", async (job) => {
     console.log("Job received: ", job.id)
 
     const { submissionId, pid, user, code } = job.data; 
 
-    //get problem data
-    const problem = await db.collection("problems").doc(pid).get()
+    const problem = await db.collection("problems").doc(pid).get();
 
     if(!problem.exists) {
         console.log("Problem not found: ", pid)
@@ -38,6 +39,7 @@ const worker = new Worker("judge", async (job) => {
     .update({
         status: "JUDGING"
     });
+
 
     //compile the file
     const dir = await createSubmissionDir();
@@ -67,6 +69,7 @@ const worker = new Worker("judge", async (job) => {
         console.log("Compilation succeeded")
     }
 
+    console.log('Downloading tests!');
     await cacheTests(pid);
 
     let subtaskLen = problemData.subtaskPoints.length;
@@ -79,17 +82,40 @@ const worker = new Worker("judge", async (job) => {
     let maxMemory = 0;
 
     for(let i=0; i<subtaskLen; i++) {
+        let skipped = false;
+
+        for(let j=0; j<i; j++) {
+            if(problemData.depend[i] & (1 << j)) {
+                if(!subtaskResults[j].includes("AC")) {
+                    skipped = true;
+                    break;
+                }
+            }
+        }
+
         let R = problemData.subtaskRange[i];
 
         let score = problemData.subtaskPoints[i];
         let subtaskFlag = 'AC';
 
-        for(let j=L; j<=R; j++) {
+        if(skipped) {
+            score = 0;
+            subtaskFlag = "SKIP";
+        }
+
+        for(let j=L; j<=R&&!skipped; j++) {
             const test = await getTest(`${pid}/${j}.in`)
 
             const output = await run(dir, test, problemData.timeLimit, problemData.memoryLimit);
 
             maxMemory = Math.max(maxMemory, output.memory);
+
+            if(output.ole) {
+                score = 0;
+                subtaskFlag = 'OLE';
+                maxTime = problemData.timeLimit;
+                break;
+            }
 
             if(output.timedOut) {
                 score = 0;
@@ -103,16 +129,16 @@ const worker = new Worker("judge", async (job) => {
             if(output.code !== 0) {
                 score = 0;
                 subtaskFlag = 'RE';
-                console.log('Error ', output.stderr)
+                console.log('Error ', output.res.stderr)
                 break;
             }
 
             const expected = await getTest(`${pid}/${j}.out`);
 
-            console.log('Expected: ', expected);
-            console.log('Output: ', output)
+            // console.log('Expected ', expected);
+            // console.log('Output ', output.outputRes);
 
-            if(expected.trim() !== output.stdout.trim()) {
+            if(expected.trim() !== output.outputRes.trim()) {
                 score = 0;
                 subtaskFlag = 'WA';
                 break;

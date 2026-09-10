@@ -28,7 +28,7 @@ export const Competiton = () => {
       <div className="flex-[3] mb-4 w-full [&_b]:text-blue-900">
         <AnimatePresence mode="wait">
           {loading ? (
-            <motion.p
+            <motion.div
               key="loading"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -36,7 +36,7 @@ export const Competiton = () => {
               transition={{ duration: 0.15 }}
             >
               <Loading />
-            </motion.p>
+            </motion.div>
           ) : (
             Content && (
               <motion.div

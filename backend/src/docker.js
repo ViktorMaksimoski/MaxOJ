@@ -43,6 +43,8 @@ export const runDocker = (args, input = "", timeLimit = 10000) => {
 
             const timedOut = stderr.includes("__TLE__");
 
+            const ole = stderr.includes("__OLE__");
+
             const time = timeMatch
                 ? Number(timeMatch[1])
                 : null;
@@ -69,7 +71,8 @@ export const runDocker = (args, input = "", timeLimit = 10000) => {
                 signal,
                 time,
                 exitCode,
-                memory: memoryMb
+                memory: memoryMb,
+                ole
             })
         })
     })
