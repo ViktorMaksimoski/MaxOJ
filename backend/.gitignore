@@ -3,3 +3,5 @@ serviceAccountKey.json
 cache/
 generator/tests/
 node_modules
+generator/a.out
+generator/sol

@@ -1,0 +1,70 @@
+<TaskHead>
+    <Title>Minor Subarrays</Title>
+    <Metadata timeL={1} memoryL={256}/>
+</TaskHead>
+
+<TaskBody>
+    You are given $$2$$ arrays $$A$$ and $$B$$ both of length $$N$$.
+
+    <br/>
+
+    For every pair of integers $$(i, j)$$ $$(1 \leq i \le j \leq N)$$, the cost
+    of is defined as:
+
+    $$$
+    f(i, j) = min_A(i...j) \cdot or_B(i...j)
+    $$$
+
+    Where $$min_A$$ is the minimum value in the subarray of $$A$$
+
+    and $$or_B$$ is the bitwise $$OR$$ value of the numbers in the subarray of $$B$$
+
+    <br/>
+
+    Your task is to find
+
+    $$$
+        \sum_{1 \leq i \leq j \leq N} f(i, j)
+    $$$
+
+    Or simply said, the sum of costs of al subarrays!
+
+</TaskBody>
+
+
+<TaskSubtasks>
+    <Subtask id={1} points={10}>$N \leq 2000$</Subtask>
+    <Subtask id={2} points={10}>$A_i = B_i$ and $0 \le A_i \le 1$</Subtask>
+    <Subtask id={3} points={10}>$B_i = 1$ and $0 \le A_i \le 20$</Subtask>
+    <Subtask id={4} points={15}>$B_i = 1$</Subtask>
+    <Subtask id={5} points={10}>$A_i = 1$ and $B_i$ are powers of $2$</Subtask>
+    <Subtask id={6} points={25}>$A_i = 1$</Subtask>
+    <Subtask id={7} points={20}>Original constraints</Subtask>
+</TaskSubtasks>
+
+<Section title="Влез">
+    On the first line of the input you are given the number 
+    $$N (1 \leq N \leq 2 \cdot 10^5)$$
+    which represents the size of the arrays.
+
+The next line contains $$N$$ space separated integers $$A_1$$, $$A_2$$, ..., $$A_n$$ $$(0 \leq A_i \leq 10^9)$$ which represent the elements of the array $$A$$
+
+The next line contains $$N$$ space separated integers $$B_1$$, $$B_2$$, ..., $$B_n$$ $$(0 \leq B_i \leq 10^9)$$ which represent the elements of the array $$B$$
+</Section>
+
+<Section title="Излез">
+    Print the total sum modulo $$10^9 + 7$$
+</Section>
+
+<TaskSamples>
+    <Sample>
+        <pre>
+            10
+            83 43 30 20 17 6 26 88 87 100
+            37 92 74 15 79 81 45 52 98 34
+        </pre>
+        <pre>
+            112087
+        </pre>
+    </Sample>
+</TaskSamples>

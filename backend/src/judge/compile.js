@@ -1,7 +1,7 @@
 import path from "path";
 import { runDocker } from '../docker.js'
 
-export const compiler = async (dir) => {
+export const compiler = async (dir, name) => {
     const res = await runDocker([
         "run",
         "--rm",
@@ -23,9 +23,9 @@ export const compiler = async (dir) => {
         "-std=c++17",
         "-O2",
 
-        "/judge/main.cpp",
+        `/judge/${name}.cpp`,
         "-o",
-        "/judge/main"
+        `/judge/${name}`
     ])
 
     return res;

@@ -26,13 +26,13 @@ export const problemsCacheCleanup = async () => {
             })
         }
 
-        const pkey = `problem-cache:${pid}`
-        const pexists = await upstash.exists(pkey);
+        const checkerKey = `checker-cache:${pid}`
+        const checkerExists = await upstash.exists(checkerKey);
 
-        if(!pexists) {
-            console.log(`Deleting metadata for ${pid}`)
+        if(!exists) {
+            console.log(`Deleting checker for ${pid}`);
 
-            await fs.rm(path.join(CACHE_DIR, "problems", pid), {
+            await fs.rm(path.join(CACHE_DIR, "checkers", pid), {
                 recursive: true,
                 force: true
             })

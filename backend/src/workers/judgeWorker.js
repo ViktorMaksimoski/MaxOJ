@@ -10,6 +10,7 @@ import { run } from "../judge/run.js";
 import { cacheTests } from "../utils/testCache.js";
 import { OutputLocation$ } from "@aws-sdk/client-s3";
 import { cacheProblem } from "../utils/problemCache.js";
+import { cacheChecker } from "../utils/checkerCache.js";
 // import { getProblem } from "../utils/getProblem.js";
 
 const worker = new Worker("judge", async (job) => {
@@ -46,7 +47,7 @@ const worker = new Worker("judge", async (job) => {
 
     await fs.writeFile(path.join(dir, "main.cpp"), code);
 
-    const res = await compiler(dir);
+    const res = await compiler(dir, "main");
 
     let flag = "", points = 0;
 
@@ -67,6 +68,17 @@ const worker = new Worker("judge", async (job) => {
         }
     } else {
         console.log("Compilation succeeded")
+    }
+
+    //compile checker
+    const checker = await cacheChecker(problemData.checker);
+
+    await fs.writeFile(path.join(dir, "checker.cpp"), checker);
+
+    const checkerRes = await compiler(dir, "checker");
+
+    if(checkerRes.code !== 0) {
+        console.log("Checker compilation failed: ")
     }
 
     console.log('Downloading tests!');
@@ -105,8 +117,9 @@ const worker = new Worker("judge", async (job) => {
 
         for(let j=L; j<=R&&!skipped; j++) {
             const test = await getTest(`${pid}/${j}.in`)
+            const expected = await getTest(`${pid}/${j}.out`);
 
-            const output = await run(dir, test, problemData.timeLimit, problemData.memoryLimit);
+            const output = await run(dir, test, expected, problemData.timeLimit, problemData.memoryLimit);
 
             maxMemory = Math.max(maxMemory, output.memory);
 
@@ -126,19 +139,14 @@ const worker = new Worker("judge", async (job) => {
 
             maxTime = Math.max(maxTime, output.time);
 
-            if(output.code !== 0) {
+            if(output.code > 1) {
                 score = 0;
                 subtaskFlag = 'RE';
-                console.log('Error ', output.res.stderr)
+                console.log('Error ', output.stderr)
                 break;
             }
 
-            const expected = await getTest(`${pid}/${j}.out`);
-
-            // console.log('Expected ', expected);
-            // console.log('Output ', output.outputRes);
-
-            if(expected.trim() !== output.outputRes.trim()) {
+            if(output.wa) {
                 score = 0;
                 subtaskFlag = 'WA';
                 break;

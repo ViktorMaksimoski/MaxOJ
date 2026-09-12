@@ -18,3 +18,4 @@ npm run worker
 
 ## Buildanje docker image
 
+docker build --no-cache -t maxoj-cpp . -f Dockerfile.judge

@@ -1,5 +1,6 @@
 import fs from "fs";
-import path from "path";
+import fsPromises from "fs/promises"
+import path, { normalize } from "path";
 import { execFileSync } from "child_process";
 import readlineSync from "readline-sync";
 import { db } from "./src/config/firebase.js";
@@ -227,7 +228,7 @@ const subtaskCount = askInt(
     1
 );
 
-const subtasks = [];
+const subtasks = [], depend = [];
 
 for (let i = 1; i <= subtaskCount; i++) {
 
@@ -248,6 +249,23 @@ for (let i = 1; i <= subtaskCount; i++) {
         firstTest
     );
 
+    const dependCnt = askInt(
+        "Depends on: "
+    );
+
+    let dependVal = 0;
+    for(let j=0; j<dependCnt; j++) {
+        const dependSubtask = askInt(
+            `[${j+1}]: Dependending on subtask: `
+        )
+
+        if(dependSubtask >= i) {
+            console.error("Subtask can\'t depend on a future subtask!")
+            process.exit(1);
+        }
+
+        dependVal |= (1 << (dependSubtask - 1));
+    }
 
     // ----------------------------------------------
     // Check test range
@@ -285,6 +303,8 @@ for (let i = 1; i <= subtaskCount; i++) {
         lastTest,
         tests
     });
+
+    depend.push(dependVal)
 }
 
 
@@ -312,6 +332,21 @@ if (totalPoints !== 100) {
 }
 
 
+let checker = "";
+while(true) {
+    checker = askString(
+        "Do you want to use a special checker for this problem(Y/N): "
+    )
+
+    if(checker == "Y") {
+        checker = `${problemId}.cpp`;
+        break;
+    } else if(checker == "N") {
+        checker = `normal.cpp`
+        break;
+    }
+}
+
 // ==================================================
 // Display final data
 // ==================================================
@@ -325,6 +360,7 @@ console.log(`Name:         ${name}`);
 console.log(`Time limit:   ${timeLimit} ms`);
 console.log(`Memory limit: ${memoryLimit} MB`);
 console.log(`Tests:        ${inputTests.length}`);
+console.log(`Checker:      ${checker}`);
 
 console.log("\nSubtasks:");
 
@@ -342,7 +378,7 @@ console.log("       VALIDATION SUCCESSFUL");
 console.log("================================\n");
 
 console.log(
-    "The problem is ready to be uploaded to Firebase."
+    "The problem is ready to be uploaded to Firebase and Backblaze."
 );
 
 
@@ -364,6 +400,8 @@ try {
         memoryLimit,
         subtaskPoints,
         subtaskRange,
+        depend,
+        checker
     })
 
     console.log("Problem metadata uploaded to firebase")
@@ -384,5 +422,24 @@ for (const testNumber of inputTests) {
         Bucket: process.env.B2_BUCKET_NAME,
         Key: `${problemId}/${testNumber}.out`,
         Body: fs.readFileSync(path.join(testsDir, `${testNumber}.out`))
+    }))
+}
+
+//add checker to backblaze
+if(checker != "normal.cpp") {
+    const checkerCode = await fsPromises.readFile(
+        path.join(
+            process.cwd(),
+            "generator",
+            "checker.cpp"
+        ),
+        "utf8"
+    )
+
+    console.log("Uploading checker...");
+    await s3.send(new PutObjectCommand({
+        Bucket: process.env.B2_BUCKET_NAME,
+        Key: `checkers/${problemId}.cpp`,
+        Body: checkerCode
     }))
 }

@@ -1,0 +1,48 @@
+<TaskHead>
+    <Title>Inverse Inversions</Title>
+    <Metadata timeL={1} memoryL={128}/>
+</TaskHead>
+
+<TaskBody>
+    Your task is to create a permutation of numbers $$1, 2, ..., N$$ that has exactly $$K$$ inversion.
+
+    An inversion is a pair $$(a, b)$$ where $$a < b$$ and $$p_a > p_b$$, where
+    $$p_i$$ denotes the number at position $$i$$ of the permutation $$p$$
+
+</TaskBody>
+
+
+<Section title="Влез">
+    Тhe only input line has two integers $$N$$ $$(1 \leq N \leq 10^6)$$ and $$K$$ $$(1 \leq K \leq \frac{N\cdot(N-1)}{2})$$.
+</Section>
+
+<Section title="Излез">
+    Print a line that contains the permutation. You can print any valid solution.
+</Section>
+
+<TaskSamples>
+    <Sample>
+        <pre>
+            5 4
+        </pre>
+        <pre>
+            1 5 2 4 3
+        </pre>
+    </Sample>
+    <Sample>
+        <pre>
+            4 0 
+        </pre>
+        <pre>
+            1 2 3 4
+        </pre>
+    </Sample>
+    <Sample>
+        <pre>
+            4 6
+        </pre>
+        <pre>
+            4 3 2 1
+        </pre>
+    </Sample>
+</TaskSamples>

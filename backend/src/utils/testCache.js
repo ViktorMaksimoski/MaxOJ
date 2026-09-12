@@ -26,12 +26,12 @@ export const cacheTests = async (pid) => {
     if(cached) {
         console.log(`Using cached tests for problem ${pid}`)
 
-        await upstash.expire(`test-cache:${pid}`, 15 * 60)
+        await upstash.expire(`test-cache:${pid}`, 30 * 60)
 
         return getCachePath(pid);
     }
 
     const res = await getAllTests(pid);
-    await upstash.set(`test-cache:${pid}`, "1", { ex: 15 * 60 });
+    await upstash.set(`test-cache:${pid}`, "1", { ex: 30 * 60 });
     return res;
 }

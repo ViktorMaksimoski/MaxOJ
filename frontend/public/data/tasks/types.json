@@ -1,6 +1,13 @@
 {
     "years": [
         {
+            "year": 2026,
+            "types": [
+                { "name": "Constructive", "code": "con" },
+                { "name": "Авторски", "code": "aut" }
+            ]
+        },
+        {
             "year": 2025,
             "types": [
                 { "name": "Училишен", "code": "ucilisen" },

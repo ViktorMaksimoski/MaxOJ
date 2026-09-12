@@ -5,12 +5,7 @@ export const runDocker = (args, input = "", timeLimit = 10000) => {
     return new Promise((res, rej) => {
         const process = spawn('docker', args);
 
-        let stdout = "", stderr = "", timedOut = false
-
-
-        process.stdout.on('data', (data) => {
-            stdout += data.toString()
-        })
+        let stderr = "", timedOut = false
 
         process.stderr.on('data', (data) => {
             stderr += data.toString()
@@ -19,7 +14,6 @@ export const runDocker = (args, input = "", timeLimit = 10000) => {
         process.on('error', (err) => {
             rej(err)
         })
-        
 
         process.stdin.write(input)
         process.stdin.end()
@@ -29,13 +23,13 @@ export const runDocker = (args, input = "", timeLimit = 10000) => {
                 /__TIME__ ([0-9.]+)/
             );
 
-            const exitMatch = stderr.match(
-                /__EXIT__ (-?\d+)/
-            );
+            // const exitMatch = stderr.match(
+            //     /__EXIT__ (-?\d+)/
+            // );
 
-            const signalMatch = stderr.match(
-                /__SIGNAL__ (\d+)/
-            );
+            // const signalMatch = stderr.match(
+            //     /__SIGNAL__ (\d+)/
+            // );
 
             const memoryMatch = stderr.match(
                 /__MEMORY__ (\d+)/
@@ -45,17 +39,19 @@ export const runDocker = (args, input = "", timeLimit = 10000) => {
 
             const ole = stderr.includes("__OLE__");
 
+            const wa = stderr.includes("__WA__");
+
             const time = timeMatch
                 ? Number(timeMatch[1])
                 : null;
 
-            const exitCode = exitMatch
-                ? Number(exitMatch[1])
-                : null;
+            // const exitCode = exitMatch
+            //     ? Number(exitMatch[1])
+            //     : null;
 
-            const signal = signalMatch
-                ? Number(signalMatch[1])
-                : null;
+            // const signal = signalMatch
+            //     ? Number(signalMatch[1])
+            //     : null;
 
             const memory = memoryMatch
                 ? Number(memoryMatch[1])
@@ -65,14 +61,12 @@ export const runDocker = (args, input = "", timeLimit = 10000) => {
 
             res({
                 code,
-                stdout,
                 stderr,
                 timedOut,
-                signal,
                 time,
-                exitCode,
                 memory: memoryMb,
-                ole
+                ole,
+                wa
             })
         })
     })
