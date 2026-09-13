@@ -3,6 +3,7 @@ import { db } from './config/firebase.js'
 import submissionRouter from './routes/submission.js'
 import codesRouter from './routes/codes.js'
 import imagesRouter from './routes/images.js'
+import usersRouter from './routes/users.js'
 import cors from "cors"
 import { problemsCacheCleanup } from './utils/problemsCacheCleanup.js'
 import { imagesCacheCleanup } from './utils/imagesCacheCleanup.js'
@@ -57,13 +58,15 @@ app.use('/api/codes', codesRouter)
 
 app.use('/api/images', imagesRouter)
 
+app.use('/api/users', usersRouter)
+
 //start server
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}`)
 
     setInterval(() => {
         imagesCacheCleanup();
-    }, 2.5 * 60 * 1000)
+    }, 1.5 * 60 * 1000)
 
     setInterval(() => {
         problemsCacheCleanup();

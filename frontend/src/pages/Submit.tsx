@@ -66,7 +66,7 @@ using namespace std;
     const pid = `${year}${compId}${taskId}`;
     const token = await user.getIdToken();
 
-    const res = await fetch("http://localhost:5001/api/submission", {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/submission`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

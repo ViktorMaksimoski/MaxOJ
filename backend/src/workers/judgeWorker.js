@@ -11,6 +11,7 @@ import { cacheTests } from "../utils/testCache.js";
 import { OutputLocation$ } from "@aws-sdk/client-s3";
 import { cacheProblem } from "../utils/problemCache.js";
 import { cacheChecker } from "../utils/checkerCache.js";
+import { FieldValue } from "firebase-admin/firestore";
 // import { getProblem } from "../utils/getProblem.js";
 
 const worker = new Worker("judge", async (job) => {
@@ -175,10 +176,45 @@ const worker = new Worker("judge", async (job) => {
 
     await db.collection("submissions").doc(submissionId)
     .update({
-        status: "JUDGED"
+        status: "JUDGED",
+        finishedAt: new Date()
     })
 
     console.log("Points won: ", points)
+
+    let AC = 0, WO = 0;
+    const solved = await redis.sismember(`accepted:${user}`, pid);
+
+    if(!solved) {
+        if(points == 100) {
+            await redis.sadd(`accepted:${user}`, pid);
+
+            AC += 1;
+
+            const removed = await redis.srem(`working:${user}`, pid);
+
+            if(removed == 1) {
+                WO -= 1;
+            }
+        } else {
+            const added = await redis.sadd(`working:${user}`, pid);
+
+            if(added == 1) {
+                WO += 1
+            }
+        }
+    }
+
+    await db.collection("users").doc(user)
+    .update({
+        subCount: FieldValue.increment(1),
+        solved: FieldValue.increment(AC),
+        workingOn: FieldValue.increment(WO),
+        lastPoints: points,
+        lastSubmission: pid,
+        lastName: problemData.name,
+        lastDate: new Date()
+    })
  
     return {
         status: "finished",

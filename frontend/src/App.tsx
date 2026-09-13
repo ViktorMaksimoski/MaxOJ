@@ -14,6 +14,7 @@ import { Competiton } from "./pages/Competiton.tsx";
 import { Submit } from "./pages/Submit.tsx";
 import { Submission } from "./pages/Submission.tsx";
 import { GetSubmissions } from "./pages/GetSubmissions.tsx";
+import { Profile } from "./pages/Profile.tsx";
 
 export const App = () => {
   return (
@@ -49,15 +50,25 @@ export const App = () => {
             } />
             <Route path="/judge/:year/:compId/:taskId/submit"
             element={
-              <Submit />
+              <UsersOnlyRoute>
+                <Submit />
+              </UsersOnlyRoute>
             } />
             <Route path="/judge/:year/:compId/:taskId/view/:page"
             element={
-              <GetSubmissions />
+              <UsersOnlyRoute>
+                <GetSubmissions />
+              </UsersOnlyRoute>
             } />
             <Route path="/judge/submission/:id"
             element={
               <Submission />
+            } />
+            <Route path="/judge/profile"
+            element={
+              <UsersOnlyRoute>
+                <Profile />
+              </UsersOnlyRoute>
             } />
         </Route>
       </Routes>

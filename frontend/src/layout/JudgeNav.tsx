@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../contexts/AuthContext";
 import { BookOpenIcon, LogOutIcon } from "lucide-react";
 import { useState } from "react";
@@ -10,6 +10,7 @@ export const JudgeNav = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [logOut, setLogOut] = useState(false);
+  const location = useLocation();
 
   const logOutFunc = async () => {
     try {
@@ -19,6 +20,11 @@ export const JudgeNav = () => {
       console.log(err);
       toast.error("Не може да се одјавите! Пробајте повторно");
     }
+  }
+
+  const goToProfile = () => {
+    if(location.pathname !== "/judge/profile")
+        navigate("/judge/profile");
   }
 
   return (
@@ -56,6 +62,7 @@ export const JudgeNav = () => {
               <button
               className="text-lg px-6 text-white
                 bg-blue-800 py-1.5 rounded-md"
+              onClick={goToProfile}
               >
                 {user.displayName}
               </button>
