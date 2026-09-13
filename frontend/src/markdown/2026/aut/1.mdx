@@ -32,14 +32,14 @@
 </TaskBody>
 
 
-<TaskSubtasks>
-    <Subtask id={1} points={10}>$N \leq 2000$</Subtask>
-    <Subtask id={2} points={10}>$A_i = B_i$ and $0 \le A_i \le 1$</Subtask>
-    <Subtask id={3} points={10}>$B_i = 1$ and $0 \le A_i \le 20$</Subtask>
-    <Subtask id={4} points={15}>$B_i = 1$</Subtask>
-    <Subtask id={5} points={10}>$A_i = 1$ and $B_i$ are powers of $2$</Subtask>
-    <Subtask id={6} points={25}>$A_i = 1$</Subtask>
-    <Subtask id={7} points={20}>Original constraints</Subtask>
+<TaskSubtasks depend={true}>
+    <Subtask id={1} points={10} dep="/">$N \leq 2000$</Subtask>
+    <Subtask id={2} points={10} dep="/">$A_i = B_i$ and $0 \le A_i \le 1$</Subtask>
+    <Subtask id={3} points={10} dep="/">$B_i = 1$ and $0 \le A_i \le 20$</Subtask>
+    <Subtask id={4} points={15} dep="3">$B_i = 1$</Subtask>
+    <Subtask id={5} points={10} dep="/">$A_i = 1$ and $B_i$ are powers of $2$</Subtask>
+    <Subtask id={6} points={25} dep="5">$A_i = 1$</Subtask>
+    <Subtask id={7} points={20} dep={'1 - 6'}>Original constraints</Subtask>
 </TaskSubtasks>
 
 <Section title="Влез">

@@ -3,8 +3,6 @@
 
 MaxOJ е платформа на македонски јазик која има цел да го доближи натпреварувачкото програмирање до учениците и сите ентузијасти.
 
-### Како да го активирате
-
 ## За фронтенд: 
 
 ```
@@ -21,6 +19,8 @@ npm run dev
 Лекциите се во **.mdx** формат. 
 
 За полесно уредување имам создадено свои компоненти.
+
+### Компоненти за лекции
 
 ## SectionTitle
 
@@ -197,6 +197,91 @@ level={4} />
 <Spoiler title="Hint 1">
 	Овој hint е од голема помош.
 </Spoiler>
+```
+
+### Компоненти за задачи
+
+## Глава на задача
+
+Секој задача треба да започне вака
+
+```tsx
+<TaskHead>
+    <Title>Minor Subarrays</Title>
+    <Metadata timeL={1} memoryL={256}/>
+</TaskHead>
+```
+
+Мислам дека ова кодче е себеобјаснувачко
+
+## Текст на задача
+
+Го пишувате во 
+
+```tsx
+<TaskBody>
+
+</TaskBody>
+```
+
+## Подзадачи
+
+```tsx
+
+<TaskSubtasks depend={true}>
+    <Subtask id={1} points={10} dep="/">$N \leq 2000$</Subtask>
+    <Subtask id={2} points={10} dep="/">$A_i = B_i$ and $0 \le A_i \le 1$</Subtask>
+    <Subtask id={3} points={10} dep="/">$B_i = 1$ and $0 \le A_i \le 20$</Subtask>
+    <Subtask id={4} points={15} dep="3">$B_i = 1$</Subtask>
+    <Subtask id={5} points={10} dep="/">$A_i = 1$ and $B_i$ are powers of $2$</Subtask>
+    <Subtask id={6} points={25} dep="5">$A_i = 1$</Subtask>
+    <Subtask id={7} points={20} dep={'1 - 6'}>Original constraints</Subtask>
+</TaskSubtasks>
+```
+
+**id** и **points** се секогаш задолжителни. 
+
+Во случај задачата да користи зависности, може да ги запишете со поставување
+на **depend** на **true** и потоа во секоја подзачада преку **dep** ги запишувате
+
+## Секции
+
+Може да се користат за да се опишта влезот, излезот или за објаснување на примери.
+
+```tsx
+<Section title="Излез">
+    // Tekst ovde
+</Section>
+```
+
+## Примери
+
+```tsx
+
+<TaskSamples>
+    <Sample>
+        <pre>
+            2 4
+        </pre>
+        <pre>
+            8
+        </pre>
+    </Sample>
+</TaskSamples>
+```
+
+Секој **Sample** мора да биде опфатен во **TaskSamples**.
+За секој пример влезот е опфатен во 1то **pre**, а излезот во 2то.
+
+## Информации/Предупредување
+
+Се користи пред текстот на задачата за да извести натпреварувачот за
+некои нестандардни специфики на задачата (Пример. мал мемориски лимит)
+
+```tsx
+<Info>
+	//tekst ovde
+</Info>
 ```
 
 ## Image

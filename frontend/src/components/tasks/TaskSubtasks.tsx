@@ -1,12 +1,20 @@
-export const TaskSubtasks = ({ children }: {children: React.ReactNode}) => {
+import type React from "react";
+
+interface TaskSubtaskProps {
+  depend: boolean;
+  children: React.ReactNode
+};
+
+export const TaskSubtasks = ({ depend, children }: TaskSubtaskProps) => {
   return (
     <table className='w-[95%] sm:w-[70%] table-auto mx-auto bg-white mt-6 mb-4 rounded-md
     shadow-sm shadow-slate-200 border hover:border-blue-200 border-collapse'>
         <thead className='py-0.5 border-b'>
           <tr className='w-full'>
             <th className='w-[10%] text-center border font-medium'>#</th>
-            <th className='w-[20%] text-center border font-medium'>Поени</th>
-            <th className='w-[70%] text-center border font-medium'>Ограничувања</th>
+            <th className='w-[15%] text-center border font-medium'>Поени</th>
+            <th className='w-[55%] text-center border font-medium'>Ограничувања</th>
+            {depend && <th className="w-[20%] text-center border font-medium">Зависност</th>}
           </tr>
         </thead>
         <tbody>
