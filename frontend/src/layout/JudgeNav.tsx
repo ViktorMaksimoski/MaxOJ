@@ -68,16 +68,10 @@ export const JudgeNav = () => {
               </button>
 
               {logOut &&
-              <div className="absolute right-0 top-full">
-                <div className="absolute right-6 -top-1 w-0 h-0
-                border-l-[20px] border-r-[20px] border-b-[15px]
-                border-l-transparent border-r-transparent 
-                border-b-white">
-
-                </div>
-                <button className="bg-white
+              <div className="absolute top-full right-0">
+                <button className="bg-white border border-gray-200
                 rounded-md text-base font-semibold py-1.5 px-6
-                flex gap-1 items-center shadow-sm text-blue-600
+                flex gap-1 items-center shadow-lg text-blue-600
                 hover:text-blue-700"
                 onClick={logOutFunc}>
                   <LogOutIcon />

@@ -8,14 +8,14 @@ const router = express.Router()
 router.get('/', authMiddleware, async (req, res) => {
     const uid = req.user.uid;
 
-    // const { success, reset } = await userViewLimit.limit(uid);
+    const { success, reset } = await userViewLimit.limit(uid);
 
-    // if(!success) {
-    //     return res.status(429).json({
-    //         success: false,
-    //         message: "Го надминавте лимитот за гледање профили. Почекајтe"
-    //     })
-    // }
+    if(!success) {
+        return res.status(429).json({
+            success: false,
+            message: "Го надминавте лимитот за гледање профили. Почекајтe"
+        })
+    }
 
     const data = (await db.collection('users').doc(uid).get()).data();
 

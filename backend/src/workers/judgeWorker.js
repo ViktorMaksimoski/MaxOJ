@@ -213,7 +213,8 @@ const worker = new Worker("judge", async (job) => {
         lastPoints: points,
         lastSubmission: pid,
         lastName: problemData.name,
-        lastDate: new Date()
+        lastDate: new Date(),
+        lastId: submissionId
     })
  
     return {
