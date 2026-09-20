@@ -26,18 +26,30 @@ export const Sidebar = ({ topicId }: SidebarProps) => {
   }, [topicId])
 
   return (
-    <div className="border shadow-sm shadow-blue-200 rounded-md border-blue-400 py-1.5 px-4 w-full">
-      <h3 className="font-semibold mb-4 text-blue-700">{topicName}</h3>
-      {lections.map(lec => (
-        <div key={lec.code}>
-          <NavLink to={`/topic/${topicId}/${lec.code}`}
-          className={({ isActive }) => isActive ? `text-blue-600` : `text-base`}>
-            <button className="hover:text-blue-400">
-              {lec.name}
-            </button>
+    <aside className="w-full rounded-lg border border-blue-400 bg-white
+    p-2 shadow-sm">
+      <h3 className="px-3 py-2 text-sm font-semibold tracking-wide
+      text-blue-500 uppercase">{topicName}</h3>
+
+      <nav className="mt-1">
+        {lections.map((lec) => (
+          <NavLink key={lec.code}
+          to={`/topic/${topicId}/${lec.code}`}
+          className={({ isActive }) => `
+            block rounded-lg px-3 py-2
+            font-medium
+            transition-all duration-150 mb-1
+            text-[15px]
+            ${
+              isActive
+              ? 'bg-blue-50 text-blue-700 shadow-sm'
+              : 'text-gray-800 hover:bg-blue-50 hover:text-blue-700'
+            }
+          `}>
+            {lec.name}
           </NavLink>
-        </div>
-      ))}
-    </div>
+        ))}
+      </nav>
+    </aside>
   )
 }

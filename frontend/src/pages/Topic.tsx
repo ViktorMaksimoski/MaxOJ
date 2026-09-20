@@ -22,7 +22,7 @@ export const Topic = () => {
       setMetaData(d);
       const vec = [];
       for (let i = 0; i < d.importance; i++)
-        vec.push(<Star key={i} className="text-blue-400" />);
+        vec.push(<Star key={i} className="text-amber-400 fill-amber-400" />);
       setStars(vec);
     };
 
@@ -53,7 +53,7 @@ export const Topic = () => {
               <h1 className="text-bold text-4xl tracking-wide">
                 {metaData.title}
               </h1>
-              <button className="flex">{stars}</button>
+              <button className="flex gap-0.5">{stars}</button>
             </div>
             <p className="text-gray-400 mt-0.5">Автор: {metaData.author}</p>
             <hr className="mt-2" />

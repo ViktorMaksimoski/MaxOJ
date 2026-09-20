@@ -77,13 +77,14 @@ export const ShowCode = ({ id }) => {
     );
 
     return (
+        
         <div className="flex border mt-6 resize-none overflow-hidden
         rounded-md border-gray-700 w-full relative"
         style={{ height: "22rem" }}>
-            <div className="absolute top-5 right-5 flex items-start gap-5">
+            <div className="absolute top-5 right-5 flex items-start gap-3">
                 <button className="group bg-sky-500 text-blue-800
-                font-mono text-base hover:text-blue-900 py-1 px-1 border-2 
-                border-blue-700 flex items-center gap-1"
+                font-mono text-base hover:text-blue-900 py-1 px-1.5 border-2 
+                border-blue-700 flex items-center"
                 onClick={copyCode}>
                     <ClipboardIcon size={23} />
 
@@ -96,8 +97,8 @@ export const ShowCode = ({ id }) => {
                     </span>
                 </button>
                 <button className="group bg-sky-500 text-blue-800 font-mono
-                text-base hover:text-blue-900 py-1 px-1 border-2
-                border-blue-700 flex items-center gap-1"
+                text-base hover:text-blue-900 py-1 px-1.5 border-2
+                border-blue-700 flex items-center"
                 onClick={downloadCode}>
                     <DownloadIcon size={23} />
 

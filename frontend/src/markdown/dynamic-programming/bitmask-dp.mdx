@@ -26,15 +26,46 @@ task="Hamiltonian Flights" level={1} />
 
 <Code>
 {[
-"#include <bits/stdc++.h>",
-"using namespace std;",
-"\nint main() {",
-"\treturn 0;",
-"}"
+"// Query/Update: O(Nlog^2N)",
+		"// Memory: O(NlogN)",
+		"struct BIT_2D_Offline {",
+		"\tint n;",
+		"\tvector<vector<ll> > tree, vals;",
+		"\n\tBIT_2D_Offline(int n, vector<pii> &U) : n(n), vals(n+1), tree(n+1) {",
+		"\t\tsort(U.begin(), U.end(), [&](pii &a, pii &b) { return a.second < b.second; });",
+		"\t\tfor(int i=1; i<=n; i++) vals[i].push_back( 0 );",
+		"\n\t\tfor(auto &[x, y]: U)",
+		"\t\t\tfor(; x<=n; x+=x&-x)",
+		"\t\t\t\tif(vals[x].back() != y) vals[x].push_back(y);",
+		"\n\t\tfor(int i=1; i<=n; i++) tree[i].resize( vals[i].size() );",
+		"\t}",
+		"\n\tint getId(int i, int v) {",
+		"\t\treturn upper_bound( vals[i].begin(), vals[i].end(), v ) - vals[i].begin() - 1;",
+		"\t}",
+		"\n\tvoid update(int x, int y, int v) {",
+		"\t\tfor(; x<=n; x+=x&-x)",
+		"\t\t\tfor(int p=getId(x, y); p<tree[x].size(); p+=p&-p) tree[x][p] += v;",
+		"\t}",
+		"\n\tll Q(int x, int y) {",
+		"\t\tif(x <= 0 || y <= 0) return 0;",
+		"\t\tll ans = 0;",
+		"\t\tfor(; x; x-=x&-x)",
+		"\t\t\tfor(int p=getId(x, y); p; p-=p&-p) ans += tree[x][p];",
+		"\t\treturn ans;",
+		"\t}",
+		"\n\tll query(int x1, int y1, int x2, int y2) {",
+		"\t\tif(x1 > x2 || y1 > y2) return 0;",
+		"\t\treturn Q(x2, y2) - Q(x1-1, y2) - Q(x2, y1-1) + Q(x1-1, y1-1);",
+		"\t}",
+		"};",
 ].join('\n')}
 </Code>
 
 <TasksTable>
 	<TaskRow url="https://atcoder.jp/contests/dp/tasks/dp_o?lang=en"
 	source="AtCoder" task="Matching" level={1} star={true} />
+	<TaskRow url="" source="CSES" task="Elevator Rides" level={2}
+	star={false} />
+	<TaskRow url="" source="USACO" task="Redistributing Gifts" level={3} />
+	<TaskRow url="" source="CF" task="Gold Experience" level={4} />
 </TasksTable>

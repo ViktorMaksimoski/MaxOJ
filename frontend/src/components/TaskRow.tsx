@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { types } from "../lib/task-types"
+import { StarIcon } from "lucide-react";
 
 interface TaskRowProps {
     url: string;
@@ -11,25 +12,32 @@ interface TaskRowProps {
 
 export const TaskRow = ({ url, source, star, task, level }: TaskRowProps) => {
   return (
-    <tr key={url} className='h-10 hover:bg-sky-50'>
-        <td className='hidden sm:table-cell text-center font-semibold text-base'>
-            <button className='underline underline-offset-2 decoration-dotted'>
+
+    <tr key={url} className='h-10 group transition-colors hover:bg-sky-50/70'>
+        <td className="hidden sm:table-cell text-center px-4">
+            <span className="text-sm font-medium tracking-wider text-gray-800">
                 {source}
-            </button>
+            </span>
         </td>
-        <td className=''>
-            <div className="flex pl-2.5 sm:pl-0">
-                <a href={url} className='hover:text-blue-400 font-semibold' target='_blank'>
+        <td className="pl-1">
+            <div className="flex pl-2.5 sm:pl-0 items-center">
+                {star && <StarIcon size={18} className="text-amber-400 fill-amber-400" />}
+                <a href={url} target='_blank'
+                className=" pl-1.5 font-semibold text-gray-800 transition-colors
+            hover:text-blue-600 tracking-wide">
                     {task}
                 </a>
-                <div className="pl-1">{star && "⭐"}</div>
             </div>
         </td>
-        <td className='text-center font-semibold px-4'>
-            <button className={`${types[level].color} text-white text-sm sm:text-base rounded-2xl px-2.5 sm:px-5 py-0.5 w-full
-                shadow-sm shadow-slate-400`}>
+        <td className="text-center px-3">
+            <span className={`
+                inline-flex items-center justify-center
+                w-[80%] rounded-full px-3 py-1
+                text-sm font-normal tracking-wider text-white
+                shadow-sm ${types[level].color}
+            `}>
                 {types[level].name}
-            </button>
+            </span>
         </td>
     </tr>
   )

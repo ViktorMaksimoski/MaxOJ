@@ -1,68 +1,104 @@
-import { useEffect, useState } from 'react'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { ClipboardIcon, DownloadIcon } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
-import { CopyIcon } from 'lucide-react';
 
 interface CodeProps {
     children: string;
 }
 
 export const Code = ({ children }: CodeProps) => {
-  const [lines, setLines] = useState<string[]>([]);
-  const [show, setShow] = useState<boolean>(true);
+  const inputRef = useRef(null)
+  const gutterRef = useRef(null)
 
-  useEffect(() => {
-    setLines(children.split('\n'))
-  }, [])
+  const linesCount = children.split('\n').length
+  const lineNumbers = Array.from({ length: linesCount }, (_, i) => i + 1).join(
+    "\n"
+   );
 
-  const copyText = async () => {
-    try {
-        await navigator.clipboard.writeText(children);
-        toast.success('Кодот е успешно копиран')
-    } catch(err) {
-        toast.error('Кодот не можеше да се копира')
-        console.log(err)
+  const syncScroll = () => {
+        if (gutterRef.current && inputRef.current)
+            gutterRef.current.scrollTop = inputRef.current.scrollTop;
+    };
+
+    const copyCode = async() => {
+        try {
+            await navigator.clipboard.writeText(children);
+            toast.success('Кодот е успешно копиран')
+        } catch(err) {
+            console.log(err);
+            toast.error('Кодот не можеше да се копира')
+        }
     }
-  }
 
-  const showButton = () => {
-    setShow(!show);
-  }
+    const downloadCode = () => {
+        const blob = new Blob([children], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
 
-  const displayedCode = !show ? lines.join('\n') : lines.slice(0, 15).join('\n')
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `kod.cpp`
+
+        a.click();
+
+        URL.revokeObjectURL(url);
+    }
 
   return (
-    <div className='w-[100%] md:w-[90%] py-2 bg-sky-50 mt-2 relative shadow-md shadow-slate-200'>
-        {window.innerWidth > 640 && <button className='absolute top-2 right-3
-        text-white bg-blue-500 font-semibold text-base
-         px-3 py-0.5 shadow-md shadow-sky-200
-         hover:bg-blue-600'
-         onClick={() => copyText()}>
-            Копирај
-        </button>}
-        {window.innerWidth <= 640 && <button className='absolute top-4 right-4
-        md:right-3 md:top-2
-        text-white bg-blue-500 text-base
-          p-2.5 shadow-md rounded-full shadow-sky-200
-         hover:bg-blue-600'
-         onClick={() => copyText()}>
-            <CopyIcon size={17}/>
-        </button>}
-        {}
-        <div className='px-4 py-1 whitespace-pre'>
-            <SyntaxHighlighter language="cpp" style={docco}>
-                {displayedCode}
-            </SyntaxHighlighter>
-            {lines.length > 10 && <div className='w-full text-center'>
-                <button className='bg-blue-500 font-semibold mb-2.5
-                md:mb-1
-                text-base shadow-sm shadow-sky-200 text-white
-                px-3 py-0.5' onClick={() => showButton()}>
-                    {show ? "Прикажи повеќе" : "Скриј"}
+    <div className='flex border mt-6 resize-none overflow-hidden
+    rounded-md border-blue-400 w-full sm:w-[90%] relative'
+    style={{ height: '22rem' }}>
+        <div className="absolute top-5 right-8 flex items-start gap-3">
+                <button className="group bg-blue-200 text-blue-700
+                font-mono text-base hover:text-blue-800 py-1 px-1.5 border-2 
+                border-blue-500 flex items-center justify-center"
+                onClick={copyCode}>
+                    <ClipboardIcon size={19} />
+
+                    <span
+                    className="max-w-0 opacity-0 overflow-hidden whitespace-nowrap
+                    group-hover:max-w-20 group-hover:opacity-100
+                    transition-all duration-200"
+                    >
+                        Копирај
+                    </span>
                 </button>
-            </div>}
+                <button className="group bg-blue-200 text-blue-700 font-mono
+                text-base hover:text-blue-800 py-1 px-1.5 border-2
+                border-blue-500 flex items-center"
+                onClick={downloadCode}>
+                    <DownloadIcon size={19} />
+
+                    <span
+                    className="max-w-0 opacity-0 overflow-hidden whitespace-nowrap
+                    group-hover:max-w-20 group-hover:opacity-100
+                    transition-all duration-200"
+                    >
+                        Спушти
+                    </span>
+                </button>
+            </div>
+        <div ref={gutterRef} className="text-center select-none py-3 px-2
+        font-mono text-base leading-5 border-r-2 border-r-blue-500
+        bg-blue-200 text-blue-700"
+        style={{ width: "2.5rem", overflow: "hidden", whiteSpace: "pre" }}>
+            {lineNumbers}
         </div>
+
+        <textarea 
+            ref={inputRef}
+            spellCheck={false}
+            rows={30}
+            value={children}
+            onScroll={syncScroll}
+
+            className="w-full overflow-y-auto font-mono
+            text-base p-3 leading-5 resize-none
+            focus:outline-none text-blue-950 code-scrollbar"
+
+            style={{ maxHeight: "22rem" }}
+
+            readOnly={true}
+            />
     </div>
   )
 }
