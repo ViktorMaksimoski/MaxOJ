@@ -1,23 +1,23 @@
-<FocusProblem url="https://cses.fi/problemset/task/1690" source="CSES"
-task="Hamiltonian Flights" level={1} />
-
 <LinksTable>
 	<LinkRow url="https://usaco.guide/CPH.pdf#page=112"
 	source="CPH" name="10.5 - DP on Bits, 19.2 - Hamiltonian Paths"
 	importance={3} />
 </LinksTable>
 
-<SectionContent title="Solution">
-	Let $$dp[S][i]$$ be the <Tag>number</Tag> of routes that visit all cities in
-	the subset $$S$$ and end at the city $$i$$. Then the transition will be:
+<SectionContent title="Фокус проблеми">
+	<FocusProblem url="https://cses.fi/problemset/task/1690" source="CSES"
+	task="Hamiltonian Flights" level={1} />
+</SectionContent>
+
+<SectionContent title="Решение">
+	Нека $$dp[S][i]$$ е бројот на рути кои ги посетуваат сите градови во
+	подмножеството $$S$$ и завршуваат во $$i$$. Тогаш транзицијата ќе биде:
 
 	$$
 	dp[S][i] = \sum_{x \in adj[i]} dp[S \setminus \{i\}][x] \quad \text{if } x \in S
 	$$
 
-	where $$S \setminus  {i}$$ is the subset $$S$$ without city $$i$$.
-
-	<Spoiler title="Ova e malo spojlerce">Baba</Spoiler>
+	каде $$S \setminus  {i}$$ е подмножеството $$S$$ без градот $$i$$.
 </SectionContent>
 
 <Code>

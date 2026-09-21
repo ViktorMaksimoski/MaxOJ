@@ -26,6 +26,7 @@ export const Sidebar = ({ topicId }: SidebarProps) => {
   }, [topicId])
 
   return (
+    
     <aside className="w-full rounded-lg border border-blue-400 bg-white
     p-2 shadow-sm">
       <h3 className="px-3 py-2 text-sm font-semibold tracking-wide

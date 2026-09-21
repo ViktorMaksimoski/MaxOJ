@@ -50,12 +50,12 @@ export const Topic = () => {
         {lectionCode && (
           <div>
             <div className="flex justify-between">
-              <h1 className="text-bold text-4xl tracking-wide">
+              <h1 className="font-medium text-gray-800 text-4xl">
                 {metaData.title}
               </h1>
               <button className="flex gap-0.5">{stars}</button>
             </div>
-            <p className="text-gray-400 mt-0.5">Автор: {metaData.author}</p>
+            <p className="text-gray-400 font-medium tracking-wide mt-0.5">Автор: {metaData.author}</p>
             <hr className="mt-2" />
           </div>
         )}

@@ -16,9 +16,8 @@ export const FocusProblem = ({
 }: FocusProblemProps) => {
   return (
     <div>
-      <h2 className="text-3xl mt-6">Focus Problem</h2>
       <div
-        className="w-[100%] sm:w-[90%] mt-6 border border-sky-300
+        className="w-[100%] mt-6 border border-sky-300
     text-left rounded-md overflow-hidden group"
       >
         <a href={url} target="__blank">

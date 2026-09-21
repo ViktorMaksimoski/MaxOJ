@@ -8,7 +8,11 @@ interface TasksTableProps {
 export const TasksTable = ({ children }: TasksTableProps) => {
   return (
     <div className="mt-8">
-      <h2 className="text-2xl">Задачи</h2>
+      <h2 className="text-3xl text-gray-800 flex items-center mt-6 
+      font-medium tracking-wide gap-3">
+        <span className="h-7 w-1 rounded-full bg-blue-600" />
+        Задачи
+      </h2>
       <AuthOnly>
         <div
           className="mt-4 w-full sm:w-[90%] overflow-hidden rounded-lg

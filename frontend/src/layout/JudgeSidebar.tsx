@@ -27,8 +27,9 @@ export const JudgeSidebar = () => {
   return (
     <div className="w-full">
       <div
-        className="shadow-md shadow-slate-300 w-full
-    rounded-md pl-4 py-1.5 bg-white"
+        className="shadow-sm shadow-slate-300 w-full
+    rounded-md px-4 pb-1.5 pt-3 bg-white border border-gray-200
+    max-h-[25rem] overflow-y-auto"
       >
         <h3 className="font-medium text-lg mb-4 flex gap-2 items-center
         text-blue-900">
@@ -42,13 +43,19 @@ export const JudgeSidebar = () => {
           <NavLink
             // key={task.code}
             to={`/judge/${year}/${compId}/${task.code}/${isSubmit?"submit":isView?"view/1":""}`}
-            className={({ isActive }) =>
-              isActive ? `text-blue-600 font-medium` : `text-base`
+            className={({ isActive }) => `
+            block rounded-lg px-3 py-1.5
+            font-medium
+            transition-all duration-150 mb-2
+            text-[15px]
+            ${
+              isActive
+              ? 'bg-blue-100 text-blue-700 shadow-sm'
+              : 'bg-gray-100 text-gray-800 hover:bg-blue-50 hover:text-blue-700'
             }
+          `}
           >
-            <button className="mb-1.5 hover:text-blue-600">
-              {task.code}. {task.name}
-            </button>
+            {task.code}. {task.name}
           </NavLink>
           </div>
         ))}
@@ -56,7 +63,7 @@ export const JudgeSidebar = () => {
       {!user && <button className="w-full bg-blue-800 border-2 border-sky-400
       mt-4 py-1.5 rounded-md text-white shadow-sm shadow-slate-300
       tracking-wide hover:shadow-none hover:bg-blue-900
-      hover:border-blue-500"
+      hover:border-blue-500 font-medium"
       onClick={() => navigate('/login')}>
         Најавете се
       </button>}

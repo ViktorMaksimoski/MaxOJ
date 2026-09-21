@@ -127,7 +127,7 @@ export const ShowCode = ({ id }) => {
 
                 className="w-full overflow-y-auto font-mono
                 text-base p-3 leading-5 resize-none
-                focus:outline-none text-blue-950"
+                focus:outline-none text-blue-950 code-scrollbar"
 
                 style={{ maxHeight: "22rem" }}
 

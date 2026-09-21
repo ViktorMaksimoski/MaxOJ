@@ -23,7 +23,7 @@ const DataCard = ({ icon, num, txt, color }) => {
       <p className="text-center mt-1 text-xl font-semibold tracking-wider">
         {num}
       </p>
-      <p className="text-center text-gray-400">{txt}</p>
+      <p className="text-center tracking-wide font-medium text-gray-400">{txt}</p>
     </div>
   );
 };
