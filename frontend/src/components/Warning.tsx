@@ -6,12 +6,12 @@ interface WarningProps {
 
 export const Warning = ({children}: WarningProps) => {
   return (
-    <div className="bg-red-500 w-[100%] sm:w-[80%] py-2 px-4 flex gap-3
-    shadow-md shadow-red-200 items-center rounded-sm mt-5">
-      <div className="text-red-700">
+    <div className="bg-red-400 w-[100%] sm:w-[90%] py-3 px-4 flex gap-3
+    shadow-sm shadow-red-100 items-center rounded-lg mt-5">
+      <div className="text-red-800">
         <XCircle />
       </div>
-      <div className="text-red-800 font-semibold">
+      <div className="text-red-800 font-medium tracking-wide">
         {children}
       </div>
     </div>

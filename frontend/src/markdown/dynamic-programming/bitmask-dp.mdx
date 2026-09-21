@@ -1,9 +1,5 @@
-<SectionTitle>Focus Problem</SectionTitle>
-
 <FocusProblem url="https://cses.fi/problemset/task/1690" source="CSES"
 task="Hamiltonian Flights" level={1} />
-
-<SectionTitle></SectionTitle>
 
 <LinksTable>
 	<LinkRow url="https://usaco.guide/CPH.pdf#page=112"
@@ -11,10 +7,8 @@ task="Hamiltonian Flights" level={1} />
 	importance={3} />
 </LinksTable>
 
-<SectionTitle>Solution</SectionTitle>
-
-<SectionContent>
-	Let $$dp[S][i]$$ be the number of routes that visit all cities in
+<SectionContent title="Solution">
+	Let $$dp[S][i]$$ be the <Tag>number</Tag> of routes that visit all cities in
 	the subset $$S$$ and end at the city $$i$$. Then the transition will be:
 
 	$$
@@ -22,6 +16,8 @@ task="Hamiltonian Flights" level={1} />
 	$$
 
 	where $$S \setminus  {i}$$ is the subset $$S$$ without city $$i$$.
+
+	<Spoiler title="Ova e malo spojlerce">Baba</Spoiler>
 </SectionContent>
 
 <Code>

@@ -10,22 +10,29 @@ export const Spoiler = ({ children, title }: SpoilerProps) => {
   const [show, setShow] = useState<boolean>(false);
 
   return (
-    <div className="mt-5 w-[100%] sm:w-[70%] shadow-sm shadow-blue-200">
+    
+    <div className="mt-5 w-[100%] overflow-hidden
+    rounded-lg border border-sky-300 shadow-sm ">
         <button
         onClick={() => setShow(!show)}
-        className={`w-full flex justify-between items-center py-2.5 px-5 rounded-t-lg text-lg font-semibold
+        className={`w-full flex justify-between items-center
+        py-2.5 px-5 rounded-t-lg text-lg font-semibold tracking-wide
+        transition-colors duration-200
         ${show 
-        ? "text-sky-500 bg-white border border-sky-500" 
-        : "text-white bg-sky-300 rounded-b-lg shadow-sm shadow-blue-200"
+        ? "text-sky-600 bg-white" 
+        : "text-white bg-blue-300 rounded-b-lg shadow-sm"
         }`}>
             {title}
             <div>
-                {show && <ArrowUpCircleIcon size={40} />}
-                {!show && <ArrowDownCircleIcon size={40} />}
+                {show && <ArrowUpCircleIcon className="shrink-0
+                transition-transform duration-200" size={30} />}
+                {!show && <ArrowDownCircleIcon className="shrink-0
+                transition-transform duration-200" size={30} />}
             </div>
         </button>
-        {show && <div className="bg-sky-600 text-white
-        font-semibold px-7 py-3 rounded-b-md">
+        {show && <div className="border-t border-sky-100
+        bg-sky-50 px-7 py-4 text-sm font-medium leading-relaxed
+        text-slate-700 tracking-wide">
             {children}
         </div>}
     </div>

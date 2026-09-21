@@ -4,7 +4,9 @@ interface TagProps {
 
 export const Tag = ({ children }: TagProps) => {
   return (
-    <span className="text-blue-600 rounded-sm border border-blue-400 mx-0.5 shadow-md shadow-slate-200 bg-slate-50 px-1.5 py-1">
+    <span className="mx-0.5 inline-block rounded-md border
+    border-blue-200 bg-blue-50 px-1.5 py-0.5 text-[0.9rem] font-semibold
+    text-blue-700">
         {children}
     </span>
   )

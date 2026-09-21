@@ -42,8 +42,8 @@ export const Sidebar = ({ topicId }: SidebarProps) => {
             text-[15px]
             ${
               isActive
-              ? 'bg-blue-50 text-blue-700 shadow-sm'
-              : 'text-gray-800 hover:bg-blue-50 hover:text-blue-700'
+              ? 'bg-blue-100 text-blue-700 shadow-sm'
+              : 'bg-gray-100 text-gray-800 hover:bg-blue-50 hover:text-blue-700'
             }
           `}>
             {lec.name}

@@ -21,11 +21,17 @@ const Dataset = ({ onSelect, setInputTopic }) => {
   };
 
   return (
-    <div className="absolute bg-white ml-4 px-4 py-2 shadow-lg">
+    <div className="absolute left-0 top-full w-full bg-white z-50
+    border border-gray-200 px-7 py-3 mt-2 rounded-lg">
+      <h4 className="text-sm font-semibold tracking-wide mb-1 text-blue-400">ТЕМИ</h4>
       {topics.map((t) => (
-        <div key={t.code} className="mb-1 hover:bg-gray-50 hover:text-blue-600">
-          <button onMouseDown={() => work(t)}>{t.name}</button>
-          <br />
+        <div key={t.code} 
+        onMouseDown={() => work(t)}
+        className="block cursor-pointer px-3 py-1 rounded-lg
+        font-medium transition-all duration-150 mb-1 text-[14px]
+        bg-gray-100 text-gray-800 tracking-wide
+        hover:bg-blue-50 hover:text-blue-500 hover:shadow-sm">
+          {t.name}
         </div>
       ))}
     </div>
@@ -75,7 +81,7 @@ export const Nav = () => {
             value={topic.name}
             placeholder="Изберете тема..."
             className="rounded-3xl outline-none border border-blue-400 bg-slate-50 text-blue-400
-                py-2 pl-8 pr-3 min-w-72 placeholder:text-blue-400
+                py-2 pl-8 pr-3 min-w-[23rem] placeholder:text-blue-400
                 hover:border-blue-500 hover:placeholder:text-blue-500"
             onChange={(e) => setOpen(true)}
             onFocus={() => setOpen(true)}

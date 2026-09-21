@@ -132,7 +132,7 @@ export const Profile = () => {
 
             {showExp && (
               <div className="absolute top-7 left-1/2 w-max bg-white
-               px-7 py-3 -translate-x-1/2 w-64 z-50 border
+               px-7 py-3 -translate-x-1/2 z-50 border
               border-gray-200 rounded-lg shadow-lg">
                 <p className="text-xs text-gray-500 mb-3">Титула се одредува според број на решени задачи:</p>
                 <div className="space-y-1.5 text-xs">
