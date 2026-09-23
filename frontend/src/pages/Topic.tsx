@@ -56,7 +56,7 @@ export const Topic = () => {
               <button className="flex gap-0.5">{stars}</button>
             </div>
             <p className="text-gray-400 font-medium tracking-wide mt-0.5">Автор: {metaData.author}</p>
-            <hr className="mt-2" />
+            <div className="mt-2 h-1 w-full border-t-2 border-t-gray-200" />
           </div>
         )}
 

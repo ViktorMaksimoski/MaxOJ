@@ -63,8 +63,9 @@ export const ShowCode = ({ id }) => {
 
     if(!show) {
         return (
-            <button className="text-white bg-blue-700 text-lg shadow-md
-            px-7 py-1.5 mt-5 rounded-md font-medium"
+            <button className="px-6 py-2 mt-4 bg-blue-500 text-white
+            rounded-md tracking-wide font-medium transition duration-200
+            hover:bg-blue-600"
             onClick={getCode}>
                 Прикажи код
             </button>
@@ -78,13 +79,14 @@ export const ShowCode = ({ id }) => {
 
     return (
         
+
         <div className="flex border mt-6 resize-none overflow-hidden
-        rounded-md border-gray-700 w-full relative"
+        rounded-md border-blue-400 w-full relative"
         style={{ height: "22rem" }}>
             <div className="absolute top-5 right-5 flex items-start gap-3">
-                <button className="group bg-sky-500 text-blue-800
-                font-mono text-base hover:text-blue-900 py-1 px-1.5 border-2 
-                border-blue-700 flex items-center"
+                <button className="group bg-blue-200 text-blue-700
+                font-mono text-base hover:text-blue-800 py-1 px-1.5 border-2 
+                border-blue-500 flex items-center justify-center"
                 onClick={copyCode}>
                     <ClipboardIcon size={23} />
 
@@ -96,9 +98,9 @@ export const ShowCode = ({ id }) => {
                         Копирај
                     </span>
                 </button>
-                <button className="group bg-sky-500 text-blue-800 font-mono
-                text-base hover:text-blue-900 py-1 px-1.5 border-2
-                border-blue-700 flex items-center"
+                <button className="group bg-blue-200 text-blue-700 font-mono
+                text-base hover:text-blue-800 py-1 px-1.5 border-2
+                border-blue-500 flex items-center"
                 onClick={downloadCode}>
                     <DownloadIcon size={23} />
 
@@ -112,8 +114,8 @@ export const ShowCode = ({ id }) => {
                 </button>
             </div>
             <div ref={gutterRef} className="text-center select-none py-3 px-2
-            font-mono text-base leading-5 border-r-2 border-r-blue-700
-            bg-sky-500 text-blue-900"
+        font-mono text-base leading-5 border-r-2 border-r-blue-500
+        bg-blue-200 text-blue-700"
             style={{ width: "2.5rem", overflow: "hidden", whiteSpace: "pre" }}>
                 {lineNumbers}
             </div>

@@ -32,9 +32,9 @@ export const JudgeSidebar = () => {
     max-h-[25rem] overflow-y-auto"
       >
         <h3 className="font-medium text-lg mb-4 flex gap-2 items-center
-        text-blue-900">
+        text-blue-900 tracking-wide">
           <button onClick={() => navigate("/judge")}>
-            <ArrowLeftIcon />
+            <ArrowLeftIcon size={23} />
           </button>
           {name}
         </h3>
@@ -60,24 +60,24 @@ export const JudgeSidebar = () => {
           </div>
         ))}
       </div>
-      {!user && <button className="w-full bg-blue-800 border-2 border-sky-400
-      mt-4 py-1.5 rounded-md text-white shadow-sm shadow-slate-300
-      tracking-wide hover:shadow-none hover:bg-blue-900
-      hover:border-blue-500 font-medium"
+      {!user && <button className="w-full bg-white mt-4 font-medium py-1.5
+      border-2 border-blue-300 text-blue-700 rounded-md shadow-sm tracking-wide
+      transition duration-200 hover:border-blue-400
+      "
       onClick={() => navigate('/login')}>
         Најавете се
       </button>}
-      {user && <button className="w-full bg-blue-800 border-2 border-sky-400
-      mt-4 py-1.5 rounded-md text-white shadow-sm shadow-slate-300
-      tracking-wide hover:shadow-none hover:bg-blue-900
-      hover:border-blue-500 font-medium"
+      {user && <button className="w-full bg-white mt-4 font-medium py-1.5
+      border-2 border-blue-300 text-blue-700 rounded-md shadow-sm tracking-wide
+      transition duration-200 hover:border-blue-400
+      "
       onClick={() => navigate(`/judge/${year}/${compId}/${taskId}/${isSubmit||isView?"":"submit"}`)}>
         {isSubmit || isView ? "Прочитај Текст" : "Испрати Решение"}
       </button>}
-      {user && <button className="w-full bg-blue-800 border-2 border-sky-400
-      mt-4 py-1.5 rounded-md text-white shadow-sm shadow-slate-300
-      tracking-wide hover:shadow-none hover:bg-blue-900
-      hover:border-blue-500 font-medium"
+      {user && <button className="w-full bg-white mt-4 font-medium py-1.5
+      border-2 border-blue-300 text-blue-700 rounded-md shadow-sm tracking-wide
+      transition duration-200 hover:border-blue-400
+      "
       onClick={() => navigate(`/judge/${year}/${compId}/${taskId}/${isView?"submit":"view/1"}`)}>
         {isView ? "Испрати Решение" : "Твои Решенија"}
       </button>}

@@ -17,7 +17,8 @@ const DataCard = ({ icon, num, txt, color }) => {
   const borderColor = `border-${color}`;
   return (
     <div
-      className={`bg-white cursor-pointer rounded-md w-full px-3 py-3 border ${color}`}
+      className={`bg-white cursor-pointer rounded-md w-full px-3 py-3 border-2
+        shadow-sm ${color}`}
     >
       {icon}
       <p className="text-center mt-1 text-xl font-semibold tracking-wider">
@@ -211,7 +212,7 @@ export const Profile = () => {
 
       <div
         className={`bg-white cursor-pointer w-full
-            rounded-md px-3 py-3 mt-6 border
+            rounded-md px-3 py-3 mt-6 border-2 shadow-sm
             ${
               data.lastPoints == 100
                 ? "border-green-500"

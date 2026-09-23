@@ -13,7 +13,7 @@ export const SubmissionPreview = ({ id, date, points }) => {
         style={{ borderColor: `hsl(${hue}, 80%, 50%)` }}
         onClick={() => navigate(`/judge/submission/${id}`)}>
             <div>
-                <h3 className="text-xl font-semibold tracking-wide">Решение #{id}</h3>
+                <h3 className="text-xl font-medium text-gray-800 tracking-wide">Решение #{id}</h3>
                 <p className="text-sm text-gray-500 mt-1.5">
                     {new Date(date._seconds * 1000).toLocaleString("mk-MK", {
                         day: "2-digit",

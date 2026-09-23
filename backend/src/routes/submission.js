@@ -15,14 +15,14 @@ router.get('/single/:pid', authMiddleware, async(req, res) => {
     try {
         const { pid } = req.params;
 
-        const { success, reset } = await singleSubmissionLimit.limit(req.user.uid)
+        // const { success, reset } = await singleSubmissionLimit.limit(req.user.uid)
 
-        if(!success) {
-            return res.status(429).json({
-                success: false,
-                message: "Го надминавте лимитот за прегледување решение. Обидете се подоцно."
-            })
-        }
+        // if(!success) {
+        //     return res.status(429).json({
+        //         success: false,
+        //         message: "Го надминавте лимитот за прегледување решение. Обидете се подоцно."
+        //     })
+        // }
 
         res.json({
             success: true

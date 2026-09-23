@@ -129,21 +129,21 @@ using namespace std;
         <JudgeSidebar />
       </div>
       <div className="flex-[3] mb-4 w-full [&_b]:text-blue-900">
-        <h1 className="text-bold text-4xl tracking-wide">
+        <h1 className="font-medium text-gray-800 text-3xl tracking-wide">
           Испратете решение за {formatNum(taskId)} задача
         </h1>
 
         <div
           className={`flex border mt-6 rounded-md overflow-hidden resize-none
-        ${bad ? "border-[3px] border-red-600" : "border-gray-700"}`}
+        ${bad ? "border-[3px] border-red-600" : "border-blue-400"}`}
           style={{ maxHeight: "22rem" }}
         >
           <div
             ref={gutterRef}
-            className={`text-center select-none py-3 px-2 
+            className={`text-center select-none py-3 px-2
             font-mono text-base leading-5 border-r-2 
-            ${!bad ? "border-r-blue-700" : "border-r-red-600"}
-            ${bad ? "bg-red-300 text-red-700" : "bg-sky-500 text-blue-900"}`}
+            ${!bad ? "border-r-blue-500" : "border-r-red-600"}
+            ${bad ? "bg-red-300 text-red-700" : "bg-blue-200 text-blue-700"}`}
             style={{ width: "2.5rem", overflow: "hidden", whiteSpace: "pre" }}
           >
             {lineNumbers}
@@ -166,9 +166,9 @@ using namespace std;
         <div className="flex mt-3 gap-6">
           <button
             onClick={submitCode}
-            className="self-start tracking-wide border-[1.5px] 
-          border-sky-400 bg-blue-800 hover:bg-blue-900 text-white 
-          font-medium px-5 py-2 rounded-md transition"
+            className="self-start tracking-wide border-2
+          border-blue-300 bg-white hover:border-blue-400 text-blue-700
+           font-medium px-5 py-2 rounded-md transition duration-200"
           >
             Испрати
           </button>
@@ -180,9 +180,9 @@ using namespace std;
               onChange={handleFileUpload} />
 
               <label htmlFor="fileUpload" className="tracking-wide
-              border-[1.5px] border-sky-400 bg-blue-800
-              hover:bg-blue-900 text-white font-medium px-5 py-2
-              rounded-md transition">
+              border-2 border-blue-300 bg-white
+               text-blue-700 font-medium px-5 py-2 hover:border-blue-400
+              rounded-md transition duration-200 cursor-pointer">
                 Прикачи
               </label>
           </div>
