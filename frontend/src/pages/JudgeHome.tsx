@@ -84,6 +84,7 @@ export const JudgeHome = () => {
                 className="font-medium tracking-wide px-3 py-1
                   bg-slate-100 text-gray-800 text-sm
                   hover:text-blue-700 hover:bg-blue-100
+                  hover:border-blue-300
                   transition-colors duration-200
                   border border-gray-200 rounded-sm"
               >

@@ -255,7 +255,7 @@ export const Submission = () => {
             flex justify-center items-center gap-3"
             >
               <div
-                className="w-10 h-10 rounded-sm bg-blue-50 flex
+                className="w-10 h-10 rounded-sm bg-blue-50 flex cursor-pointer
               justify-center items-center border-2 rounded-sm border-blue-100"
               >
                 <TimerIcon size={20} className="text-blue-600" />
@@ -280,7 +280,7 @@ export const Submission = () => {
             gap-3"
             >
               <div
-                className="w-10 h-10 rounded-sm bg-purple-50 flex
+                className="w-10 h-10 rounded-sm bg-purple-50 flex cursor-pointer
               justify-center rounded-sm items-center border-2 border-purple-100"
               >
                 <DatabaseIcon size={20} className="text-purple-600" />
