@@ -7,6 +7,7 @@ import usersRouter from './routes/users.js'
 import cors from "cors"
 import { problemsCacheCleanup } from './utils/problemsCacheCleanup.js'
 import { imagesCacheCleanup } from './utils/imagesCacheCleanup.js'
+import { checkersCacheCleanup } from './utils/checkerCacheCleanup.js'
 
 const PORT = 5001;
 const app = express();
@@ -70,5 +71,6 @@ app.listen(PORT, () => {
 
     setInterval(() => {
         problemsCacheCleanup();
+        checkersCacheCleanup();
     }, 5 * 60 * 1000)
 })
